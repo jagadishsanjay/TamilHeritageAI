@@ -1,0 +1,9 @@
+# Additional dependencies required exclusively for the Tamil AI OCR model module
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.40.0
+huggingface_hub>=0.20.0
+Pillow>=10.0.0
+numpy>=1.24.0
+gTTS>=2.5.0
+networkx>=3.0

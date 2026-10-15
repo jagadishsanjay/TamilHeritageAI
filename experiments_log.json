@@ -1,0 +1,899 @@
+[
+  {
+    "experiment_id": "EXP-1792101316",
+    "timestamp": "2026-10-16 03:25:16",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.055
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792100893",
+    "timestamp": "2026-10-16 03:18:13",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.025
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792100866",
+    "timestamp": "2026-10-16 03:17:46",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.026
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792100819",
+    "timestamp": "2026-10-16 03:16:59",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.026
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792100768",
+    "timestamp": "2026-10-16 03:16:08",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.024
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792100682",
+    "timestamp": "2026-10-16 03:14:42",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.038
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792099768",
+    "timestamp": "2026-10-16 02:59:28",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.047
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792097639",
+    "timestamp": "2026-10-16 02:23:59",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.008
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792097474",
+    "timestamp": "2026-10-16 02:21:14",
+    "experiment_name": "Tamil Suvadi AI Master Evaluation Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "0.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "100%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "100%",
+      "execution_time_seconds": 0.023
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792096962",
+    "timestamp": "2026-10-16 02:12:42",
+    "experiment_name": "Tamil Suvadi AI Master Evaluation Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.007
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792096942",
+    "timestamp": "2026-10-16 02:12:22",
+    "experiment_name": "Tamil Suvadi AI Master Evaluation Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.007
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792095974",
+    "timestamp": "2026-10-16 01:56:14",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.01
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792094640",
+    "timestamp": "2026-10-16 01:34:00",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.014
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792093501",
+    "timestamp": "2026-10-16 01:15:01",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.012
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792092660",
+    "timestamp": "2026-10-16 01:01:00",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.012
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792091573",
+    "timestamp": "2026-10-16 00:42:53",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.012
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792091031",
+    "timestamp": "2026-10-16 00:33:51",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.009
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792090594",
+    "timestamp": "2026-10-16 00:26:34",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.006
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792090150",
+    "timestamp": "2026-10-16 00:19:10",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.009
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792088643",
+    "timestamp": "2026-10-15 23:54:03",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.006
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792088100",
+    "timestamp": "2026-10-15 23:45:00",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.014
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792087961",
+    "timestamp": "2026-10-15 23:42:41",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.006
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792087506",
+    "timestamp": "2026-10-15 23:35:06",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.008
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792087393",
+    "timestamp": "2026-10-15 23:33:13",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.008
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792086664",
+    "timestamp": "2026-10-15 23:21:04",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.008
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792082805",
+    "timestamp": "2026-10-15 22:16:45",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.016
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792082195",
+    "timestamp": "2026-10-15 22:06:35",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.011
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792081013",
+    "timestamp": "2026-10-15 21:46:53",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.011
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792080908",
+    "timestamp": "2026-10-15 21:45:08",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.006
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792080063",
+    "timestamp": "2026-10-15 21:31:03",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.006
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792079913",
+    "timestamp": "2026-10-15 21:28:33",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.006
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792078910",
+    "timestamp": "2026-10-15 21:11:50",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.008
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792078579",
+    "timestamp": "2026-10-15 21:06:19",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.008
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792078201",
+    "timestamp": "2026-10-15 21:00:01",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.007
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792077585",
+    "timestamp": "2026-10-15 20:49:45",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.007
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792077488",
+    "timestamp": "2026-10-15 20:48:08",
+    "experiment_name": "Default Baseline Benchmark",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.014
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792077385",
+    "timestamp": "2026-10-15 20:46:25",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.007
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792073409",
+    "timestamp": "2026-10-15 19:40:09",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.008
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  },
+  {
+    "experiment_id": "EXP-1792073337",
+    "timestamp": "2026-10-15 19:38:57",
+    "experiment_name": "Unit Test Experiment Run",
+    "model_name": "Hybrid Tamil OCR & Transformer NLP Suite",
+    "dataset_name": "Tamil Heritage Benchmark Suite v1.0",
+    "parameters": {
+      "retrieval_min_confidence": 0.15,
+      "qa_confidence_threshold": 0.35,
+      "ocr_psm": 3
+    },
+    "metrics": {
+      "mean_cer_pct": "0.0%",
+      "mean_wer_pct": "25.0%",
+      "retrieval_p_at_1": "100%",
+      "retrieval_p_at_3": "100%",
+      "qa_accuracy": "66%",
+      "anti_hallucination_refusal_rate": "100%",
+      "citation_validity_rate": "66%",
+      "execution_time_seconds": 0.009
+    },
+    "notes": "Evaluated across authentic epigraphical and literary Tamil ground-truth sets."
+  }
+]

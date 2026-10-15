@@ -1,0 +1,40 @@
+{
+  "ENTITY_சோழன்_TEST": {
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "original_ai_prediction": {
+      "name": "சோழன்",
+      "type": "RULER"
+    },
+    "decision": "ACCEPT",
+    "status": "HUMAN_VERIFIED",
+    "status_label_ta": "ஆய்வாளரால் உறுதிப்படுத்தப்பட்டது (Human Verified)",
+    "status_color": "#10B981",
+    "reviewed_value": {
+      "name": "சோழன்",
+      "type": "RULER"
+    },
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "timestamp": "2026-10-16 03:23:51"
+  },
+  "CANON_TEST_DOC": {
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "original_ai_prediction": {
+      "name": "சோழன்"
+    },
+    "decision": "ACCEPT",
+    "status": "HUMAN_VERIFIED",
+    "status_label_ta": "ஆய்வாளரால் உறுதிப்படுத்தப்பட்டது (Human Verified)",
+    "status_color": "#10B981",
+    "reviewed_value": {
+      "name": "சோழன்"
+    },
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "timestamp": "2026-10-16 03:23:51"
+  }
+}

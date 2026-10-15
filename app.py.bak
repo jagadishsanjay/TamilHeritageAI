@@ -1,0 +1,2935 @@
+"""
+தமிழ் மரபு AI – பழமையான தமிழ் நூல்கள் எண்மமாக்கம்
+Tamil Heritage AI – Digitising Ancient Tamil Books & Palm-Leaf Manuscripts
+Dual OCR Architecture: Classical Tesseract Baseline + Fine-Tuned Hugging Face Vision Transformer
+Integrated with 4 Core Tamil NLP Intelligence Features
+"""
+
+import os
+import io
+import time
+import json
+from pathlib import Path
+from PIL import Image
+import streamlit as st
+
+# Import Core OCR & NLP Modules
+import ocr_engine
+import ai_ocr
+import tamil_ai_features
+import tamil_nlp
+import tamil_voice
+import manuscript_assistant
+import knowledge_explorer
+import semantic_search
+import manuscript_variant_ai
+import timeline_explorer
+import ai_evaluation
+import ocr_review_workflow
+import source_trust_layer
+import cross_manuscript_discovery
+import collection_intelligence
+import knowledge_verification
+
+# --- Page Configuration ---
+st.set_page_config(
+    page_title="தமிழ் மரபு AI | Tamil Heritage AI",
+    page_icon="📜",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+# --- Heritage Theme Styling (CSS) ---
+HERITAGE_CSS = """
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Mukta+Malar:wght@300;400;500;600;700&display=swap');
+
+/* Root Theme Variables */
+:root {
+    --bg-dark: #140C07;
+    --bg-card: #1F140D;
+    --bg-card-alt: #261810;
+    --border-gold: #734F27;
+    --border-bright: #D4AF37;
+    --text-ivory: #F5E8D0;
+    --text-gold: #E6CA65;
+    --text-muted: #C8AC82;
+    --accent-gold: #D4AF37;
+}
+
+/* Main App Container */
+.stApp {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 10% 15%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(138, 90, 41, 0.06) 0%, transparent 50%);
+    color: var(--text-ivory);
+    font-family: 'Mukta Malar', 'Noto Sans Tamil', serif;
+}
+
+/* Stately Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', 'Mukta Malar', serif !important;
+    color: var(--text-gold) !important;
+    letter-spacing: 0.6px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Ensure High-Contrast Labels across all widgets */
+label, .stWidgetLabel label, .stWidgetLabel p, [data-testid="stWidgetLabel"] {
+    color: var(--text-gold) !important;
+    font-weight: 600 !important;
+    font-size: 0.98rem !important;
+    letter-spacing: 0.3px;
+}
+
+/* Radio button options */
+.stRadio div[role="radiogroup"] label {
+    color: var(--text-ivory) !important;
+    font-weight: 500 !important;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.stRadio div[role="radiogroup"] label:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* Main Heritage Header Banner */
+.heritage-header {
+    background: linear-gradient(135deg, #24160E 0%, #170E08 100%);
+    border: 1.5px solid #5A3A1C;
+    border-top: 4px solid #D4AF37;
+    border-radius: 10px;
+    padding: 22px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.heritage-header-title {
+    font-family: 'Mukta Malar', 'Cinzel', serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #F8ECD5;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.heritage-header-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+/* Workspace Cards */
+.panel-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-gold);
+    border-top: 3px solid var(--accent-gold);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.panel-card-title {
+    font-family: 'Cinzel', 'Mukta Malar', serif;
+    color: var(--text-gold);
+    font-size: 1.18rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #4D3117;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+/* Empty State Placeholder in Preview */
+.empty-preview-box {
+    background: rgba(26, 16, 10, 0.6);
+    border: 2px dashed #5A3A1C;
+    border-radius: 8px;
+    padding: 44px 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.empty-preview-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.empty-preview-text {
+    font-size: 1.1rem;
+    color: var(--text-gold);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.empty-preview-sub {
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+/* Sidebar Custom Styling */
+section[data-testid="stSidebar"] {
+    background-color: #170F09 !important;
+    border-right: 1.5px solid #4D3117 !important;
+}
+
+section[data-testid="stSidebar"] h1, 
+section[data-testid="stSidebar"] h2, 
+section[data-testid="stSidebar"] h3 {
+    color: var(--text-gold) !important;
+}
+
+/* Hardware Diagnostics Badges */
+.hw-badge-box {
+    background: #1B1109;
+    border: 1px solid #4D3117;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 10px;
+}
+
+.hw-badge-title {
+    color: var(--text-gold);
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hw-badge-pill {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 6px;
+    margin-bottom: 4px;
+}
+
+.hw-pill-cpu {
+    background: rgba(212, 175, 55, 0.15);
+    color: #E6CA65;
+    border: 1px solid #734F27;
+}
+
+.hw-pill-ok {
+    background: rgba(76, 175, 80, 0.18);
+    color: #81C784;
+    border: 1px solid #2E7D32;
+}
+
+/* Buttons */
+.stButton button {
+    background: linear-gradient(180deg, #2D1D13 0%, #20130A 100%) !important;
+    color: var(--text-ivory) !important;
+    border: 1.5px solid #734F27 !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    font-family: 'Mukta Malar', serif !important;
+    transition: all 0.25s ease !important;
+}
+
+.stButton button:hover {
+    border-color: #D4AF37 !important;
+    color: #FFF !important;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.3) !important;
+    transform: translateY(-1px);
+}
+
+/* Run OCR Action Button */
+.btn-run-ocr button {
+    background: linear-gradient(135deg, #8A5A29 0%, #5A3A1C 100%) !important;
+    color: #FFF !important;
+    border: 1.5px solid #D4AF37 !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    padding: 12px 24px !important;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25) !important;
+}
+
+.btn-run-ocr button:hover {
+    background: linear-gradient(135deg, #A87033 0%, #6E4622 100%) !important;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45) !important;
+}
+
+/* Text Areas */
+.stTextArea textarea {
+    background-color: #170F09 !important;
+    color: #F8ECD5 !important;
+    border: 1.5px solid #5A3A1C !important;
+    border-radius: 6px !important;
+    font-family: 'Mukta Malar', 'Noto Sans Tamil', serif !important;
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+}
+
+.stTextArea textarea:focus {
+    border-color: #D4AF37 !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.35) !important;
+}
+
+/* Metrics */
+div[data-testid="stMetricValue"] {
+    color: #F8ECD5 !important;
+    font-size: 1.6rem !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: var(--text-gold) !important;
+    font-weight: 600 !important;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    border-bottom: 2px solid #5A3A1C !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    color: var(--text-muted) !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
+}
+
+.stTabs [aria-selected="true"] {
+    color: var(--text-gold) !important;
+    font-weight: 700 !important;
+    border-bottom: 3.5px solid #D4AF37 !important;
+    background: rgba(212, 175, 55, 0.08) !important;
+}
+
+/* Expanders */
+.streamlit-expanderHeader {
+    background-color: #1F140D !important;
+    color: var(--text-gold) !important;
+    border: 1px solid #4D3117 !important;
+    border-radius: 6px !important;
+}
+
+.stCaption {
+    color: var(--text-muted) !important;
+    font-size: 0.88rem !important;
+}
+</style>
+"""
+st.markdown(HERITAGE_CSS, unsafe_allow_html=True)
+
+
+# --- Cached Engine Loader ---
+@st.cache_resource(show_spinner=False)
+def get_cached_ai_ocr(device_preference="auto"):
+    """
+    Safely initializes and caches the local Vision Transformer AI OCR model.
+    st.cache_resource guarantees weights stay in memory across user actions.
+    """
+    return ai_ocr.load_tamil_ai_model(device_override=device_preference)
+
+
+# --- Application Header ---
+st.markdown(
+    """
+    <div class="heritage-header">
+        <div class="heritage-header-title">📜 தமிழ் மரபு AI — பழமையான தமிழ் நூல்கள் எண்மமாக்கம்</div>
+        <div class="heritage-header-subtitle">Tamil Heritage AI · Digitising Ancient Tamil Books & Palm-Leaf Manuscripts with Dual OCR & 5 Core AI Intelligence Features</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# --- Hardware & Diagnostics Verification ---
+hw_info = ocr_engine.get_system_hardware_info()
+tess_info = ocr_engine.verify_tesseract()
+
+# --- Sidebar Controls ---
+with st.sidebar:
+    st.markdown("### 🏛️ களஞ்சியக் கட்டுப்பாடுகள் (Archive Controls)")
+
+    # 1. OCR Mode Selector
+    ocr_mode = st.radio(
+        "OCR முறையைத் தேர்ந்தெடுக்கவும் (Select OCR Mode):",
+        options=[
+            "📜 Tesseract OCR",
+            "🤖 AI Model OCR (Vision Transformer)",
+            "⚖️ இரண்டையும் ஒப்பிடுக (Compare Both)",
+        ],
+        index=2,
+        help="இரட்டை OCR ஒப்பீட்டு முறை பழமையான சுவடிகளை மிகத் துல்லியமாக படிக்கப் பரிந்துரைக்கப்படுகிறது.",
+    )
+
+    # 2. Hardware Diagnostics Panel
+    st.markdown("---")
+    st.markdown("### ⚙️ கணினி நிலை (System Status)")
+
+    hw_device_name = hw_info.get("active_device", "cpu").upper()
+    hw_device_desc = "CPU (உள்ளூர் நினைவகம்)" if "cpu" in hw_device_name.lower() else "GPU முடுக்கம்"
+
+    st.markdown(
+        f"""
+        <div class="hw-badge-box">
+            <div class="hw-badge-title">வன்பொருள் (Hardware): {hw_device_name}</div>
+            <div>
+                <span class="hw-badge-pill hw-pill-cpu">இயக்க முறை: {hw_device_desc}</span>
+            </div>
+            <div style="font-size: 0.82rem; color: #C8AC82; margin-top: 4px;">
+                PyTorch: <code>v{hw_info.get('torch_version', 'N/A')}</code>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Tesseract Status Badge
+    tess_available = tess_info.get("available", False)
+    tess_color_class = "hw-pill-ok" if tess_available else "hw-pill-cpu"
+    tess_status_label = "தயார்" if tess_available else "கண்டறியப்படவில்லை"
+
+    st.markdown(
+        f"""
+        <div class="hw-badge-box" style="margin-top: 8px;">
+            <div class="hw-badge-title">Tesseract OCR:</div>
+            <div>
+                <span class="hw-badge-pill {tess_color_class}">
+                    v{tess_info.get('version', 'N/A')} {tess_status_label}
+                </span>
+            </div>
+            <div style="font-size: 0.82rem; color: #C8AC82; margin-top: 4px;">
+                மொழித் தரவு: <code>{', '.join(tess_info.get('languages', ['tam', 'eng']))}</code>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Smart Tamil Voice Status Badge
+    voice_diag = tamil_voice.check_voice_engine_status()
+    v_pill_class = "hw-pill-ok" if voice_diag["internet_connected"] else "hw-pill-cpu"
+    v_status_txt = "தயார் (Online)" if voice_diag["internet_connected"] else "இணையம் தேவை"
+    st.markdown(
+        f"""
+        <div class="hw-badge-box" style="margin-top: 8px;">
+            <div class="hw-badge-title">🔊 தமிழ்க் குரல் (Smart Tamil Voice):</div>
+            <div>
+                <span class="hw-badge-pill {v_pill_class}">
+                    {voice_diag['supported_language']} {v_status_txt}
+                </span>
+            </div>
+            <div style="font-size: 0.82rem; color: #C8AC82; margin-top: 4px;">
+                இயந்திரம்: <code>Google Neural Tamil (gTTS)</code>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Language selection for Tesseract
+    tess_lang_option = "tam"
+    if tess_available and "tam" in tess_info.get("languages", []):
+        tess_lang_option = st.selectbox(
+            "Tesseract மொழி தேர்வு:",
+            options=["tam", "tam+eng", "eng"],
+            index=0,
+            format_func=lambda x: "தமிழ் (tam)" if x == "tam" else ("தமிழ் + ஆங்கிலம் (tam+eng)" if x == "tam+eng" else "ஆங்கிலம் (eng)"),
+        )
+
+    # 3. Image Preprocessing Controls
+    st.markdown("---")
+    st.markdown("### 🎛️ படச் சீரமைப்பு (Image Preprocessing)")
+    st.caption("மங்கிய அல்லது பழுப்படைந்த சுவடிப் படங்களை மேம்படுத்த:")
+
+    to_grayscale = st.checkbox("சாம்பல் நிறமாக்கு (Grayscale)", value=True)
+    contrast_val = st.slider("மாறுபாடு (Contrast):", min_value=0.5, max_value=3.0, value=1.4, step=0.1)
+    sharpness_val = st.slider("கூர்மை (Sharpness):", min_value=0.5, max_value=3.0, value=1.3, step=0.1)
+    scale_val = st.slider("அளவு விரிவாக்கம் (Upscale):", min_value=1.0, max_value=3.0, value=1.5, step=0.25)
+    denoise_val = st.checkbox("புள்ளி நீக்கம் (Median Denoise)", value=True)
+    binarize_val = st.checkbox("இருமைப்படுத்தல் (Sauvola Binarization)", value=False)
+
+    # 4. Optional Cloud API Expander
+    st.markdown("---")
+    with st.expander("☁️ Cloud AI API (Optional Qwen2.5-VL)", expanded=False):
+        st.caption(
+            "பெரிய 3B-7B விஷன் மாதிரிகள் (எ.கா. `sair390/tamil-ocr-qwen25vl`) 8-16 GB VRAM கோரும். இலவச Hugging Face Serverless API வழியாக இதை இயக்கலாம்."
+        )
+        use_hf_cloud = st.checkbox("Enable HF Cloud API", value=False)
+        hf_token_input = st.text_input(
+            "Hugging Face Token:",
+            type="password",
+            value=os.environ.get("HF_TOKEN", ""),
+            help="huggingface.co/settings/tokens தளத்திலிருந்து பெறப்பட்ட இலவச டோக்கன்.",
+        )
+
+    # 5. Epigraphist & Researcher Security Role Switcher
+    st.markdown("---")
+    st.markdown("### 🏛️ ஆய்வுப் பொறுப்பு (Scholar Role)")
+    cur_role_key = st.session_state.get("active_user_role", "CHIEF_EPIGRAPHIST")
+    role_options = ["CHIEF_EPIGRAPHIST", "HERITAGE_ARCHIVIST", "TAMIL_SCHOLAR", "GUEST_VIEWER"]
+    role_idx = role_options.index(cur_role_key) if cur_role_key in role_options else 0
+    st.selectbox(
+        "பயனர் உரிமை நிலை (User Access Level):",
+        options=role_options,
+        index=role_idx,
+        format_func=lambda r: {
+            "CHIEF_EPIGRAPHIST": "👑 முதன்மை கல்வெட்டாய்வாளர் (Chief Epigraphist)",
+            "HERITAGE_ARCHIVIST": "🏛️ ஆவணக் காப்பாளர் (Heritage Archivist)",
+            "TAMIL_SCHOLAR": "📜 தமிழ் ஆய்வாளர் (Tamil Scholar)",
+            "GUEST_VIEWER": "👁️ பார்வையாளர் (Guest / Student - Read-only)",
+        }[r],
+        key="active_user_role",
+    )
+
+
+# --- Session State Management ---
+if "uploader_key" not in st.session_state:
+    st.session_state.uploader_key = 0
+if "doc_image" not in st.session_state:
+    st.session_state.doc_image = None
+if "doc_name" not in st.session_state:
+    st.session_state.doc_name = ""
+if "doc_info_str" not in st.session_state:
+    st.session_state.doc_info_str = ""
+if "tess_result" not in st.session_state:
+    st.session_state.tess_result = None
+if "ai_result" not in st.session_state:
+    st.session_state.ai_result = None
+if "ocr_history" not in st.session_state:
+    st.session_state.ocr_history = []
+if "batch_results" not in st.session_state:
+    st.session_state.batch_results = []
+if "pdf_page_results" not in st.session_state:
+    st.session_state.pdf_page_results = []
+if "tess_confidence_data" not in st.session_state:
+    st.session_state.tess_confidence_data = None
+if "voice_audio_bytes" not in st.session_state:
+    st.session_state.voice_audio_bytes = None
+if "voice_info" not in st.session_state:
+    st.session_state.voice_info = None
+
+if "assistant_chat_history" not in st.session_state:
+    st.session_state.assistant_chat_history = []
+if "explorer_graph_cache" not in st.session_state:
+    st.session_state.explorer_graph_cache = None
+if "voice_active_chunk" not in st.session_state:
+    st.session_state.voice_active_chunk = 0
+if "accepted_ocr_corrections" not in st.session_state:
+    st.session_state.accepted_ocr_corrections = []
+if "rejected_ocr_corrections" not in st.session_state:
+    st.session_state.rejected_ocr_corrections = []
+if "latest_evaluation_data" not in st.session_state:
+    st.session_state.latest_evaluation_data = None
+if "ocr_review_active_text" not in st.session_state:
+    st.session_state.ocr_review_active_text = ""
+if "cross_discovery_result" not in st.session_state:
+    st.session_state.cross_discovery_result = None
+
+
+# =====================================================================
+# 🏛️ TOP-LEVEL NAVIGATION: DUAL OCR + 12 ADVANCED AI HERITAGE FEATURES + NLP + AUDIT
+# =====================================================================
+tab_ocr, tab_assistant, tab_explorer, tab_cross_discovery, tab_theme, tab_voice, tab_semantic, tab_variant, tab_timeline, tab_review, tab_eval, tab_collection, tab_verification, tab_nlp, tab_history = st.tabs([
+    "📑 சுவடி ஸ்கேனர் & OCR",
+    "🤖 சுவடி AI உதவியாளர் (Assistant)",
+    "🕸️ அறிவு வரைபடம் (Knowledge Explorer)",
+    "🌐 சுவடி அறிவுப் பிணைப்பு (Cross-Discovery)",
+    "📚 இலக்கியக் கருப்பொருள் (Theme Analyzer)",
+    "🔊 தமிழ்க் குரல் (Smart Voice)",
+    "🔎 பொருள்சார் தேடல் (Semantic Search)",
+    "⚖️ பதிப்பு ஒப்பாய்வு (Variant AI)",
+    "⏳ காலவரிசை (Timeline Explorer)",
+    "✍️ OCR திருத்த மீள்பார்வை (Review Workflow)",
+    "🔬 ஆய்வு & தர மதிப்பீடு (Evaluation Dashboard)",
+    "📊 தொகுப்பு நுண்ணறிவு & காப்பகம் (Collection & Export)",
+    "✅ அறிவுத் தணிக்கை & ஒப்புதல் (Knowledge Verification)",
+    "🧠 தமிழ் NLP கருவிகள் (NLP Suite)",
+    "📜 வரலாற்றுப் பதிவேடு (History)",
+])
+
+
+# =====================================================================
+# TAB 1: சுவடி ஸ்கேனர் & இரட்டை OCR (Document Scanner & Dual OCR)
+# =====================================================================
+with tab_ocr:
+    col_upload, col_preview = st.columns([1, 1], gap="large")
+
+    with col_upload:
+        st.markdown(
+            """
+            <div class="panel-card">
+                <div class="panel-card-title">📄 ஆவணத்தைப் பதிவேற்றவும் (Upload Document)</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        # File uploader supporting multiple files (Batch OCR, Images, PDF, Word DOCX, TXT)
+        uploaded_files = st.file_uploader(
+            "பழைய நூலின் பக்கம் அல்லது ஓலைச்சுவடிப் படத்தை பதிவேற்றவும் (JPG, PNG, WEBP, PDF, DOCX, TXT):",
+            type=["jpg", "jpeg", "png", "webp", "pdf", "docx", "txt"],
+            accept_multiple_files=True,
+            key=f"file_uploader_{st.session_state.uploader_key}",
+            help="ஒற்றை அல்லது பல கோப்புகளையும் ஒரே நேரத்தில் பதிவேற்றலாம் (Images, PDF, Word DOCX, TXT).",
+        )
+
+        # Action Buttons: Load Sample & Clear
+        btn_col_sample, btn_col_clear = st.columns([1, 1])
+
+        sample_candidates = [
+            Path(__file__).resolve().parent / "samples" / "sample_tamil.jpg",
+            Path(__file__).resolve().parent.parent / "TamilHeritageAI_Model" / "sample_tamil.jpg",
+        ]
+        sample_file_path = None
+        for cand in sample_candidates:
+            if cand.is_file():
+                sample_file_path = cand
+                break
+
+        with btn_col_sample:
+            load_sample = st.button("📜 மாதிரி ஆவணம் (Load Sample)", use_container_width=True)
+        with btn_col_clear:
+            clear_doc = st.button("🗑️ ஆவணத்தை அழிக்கவும் (Clear)", use_container_width=True)
+
+        if clear_doc:
+            st.session_state.doc_image = None
+            st.session_state.doc_name = ""
+            st.session_state.doc_info_str = ""
+            st.session_state.tess_result = None
+            st.session_state.ai_result = None
+            st.session_state.batch_results = []
+            st.session_state.pdf_page_results = []
+            st.session_state.tess_confidence_data = None
+            st.session_state.uploader_key += 1
+            st.rerun()
+
+        if load_sample and sample_file_path:
+            sample_img = Image.open(sample_file_path).convert("RGB")
+            st.session_state.doc_image = sample_img
+            st.session_state.doc_name = "sample_tamil.jpg"
+            st.session_state.doc_info_str = f"மாதிரி சுவடிப் படம் (Sample: {sample_img.width} × {sample_img.height} px)"
+            st.session_state.tess_result = None
+            st.session_state.ai_result = None
+            st.session_state.tess_confidence_data = None
+            st.success("மாதிரி சுவடிப் படம் வெற்றிகரமாக ஏற்றப்பட்டது!")
+
+        elif uploaded_files:
+            # Case A: Batch Files Uploaded
+            if len(uploaded_files) > 1:
+                st.info(f"📁 **தொகுதி முறை (Batch Mode):** {len(uploaded_files)} கோப்புகள் பதிவேற்றப்பட்டுள்ளன.")
+                file_names = [f.name for f in uploaded_files]
+                chosen_file_name = st.selectbox("முன்னோட்டத்திற்கான கோப்பைத் தேர்ந்தெடுக்கவும்:", file_names)
+                chosen_file = next(f for f in uploaded_files if f.name == chosen_file_name)
+
+                f_bytes = chosen_file.read()
+                chosen_file.seek(0)
+                if chosen_file.name.lower().endswith(".pdf"):
+                    rendered = ocr_engine.render_pdf_page_to_image(f_bytes, page_number=0, dpi=200)
+                    if rendered:
+                        st.session_state.doc_image = rendered
+                        st.session_state.doc_name = chosen_file.name
+                        st.session_state.doc_info_str = f"PDF (தொகுதி): {chosen_file.name}"
+                else:
+                    try:
+                        loaded = Image.open(io.BytesIO(f_bytes)).convert("RGB")
+                        st.session_state.doc_image = loaded
+                        st.session_state.doc_name = chosen_file.name
+                        st.session_state.doc_info_str = f"படம் (தொகுதி): {chosen_file.name} ({loaded.width} × {loaded.height} px)"
+                    except Exception as load_err:
+                        st.error(f"தேர்ந்தெடுக்கப்பட்ட படத்தை வாசிக்க முடியவில்லை: {str(load_err)}")
+
+                if st.button("🚀 அனைத்துக் கோப்புகளையும் தொகுதி OCR செய் (Run Batch OCR on All Files)", use_container_width=True):
+                    batch_items = [(f.name, f.read()) for f in uploaded_files]
+                    for f in uploaded_files:
+                        f.seek(0)
+                    with st.spinner(f"{len(batch_items)} கோப்புகளை வரிசையாக OCR செயலாக்கம் செய்கிறது..."):
+                        st.session_state.batch_results = tamil_ai_features.process_batch_ocr(
+                            batch_items,
+                            ocr_mode=ocr_mode,
+                            tesseract_lang=tess_lang_option,
+                            tesseract_path=tess_info.get("path"),
+                        )
+                    st.success(f"தொகுதி OCR நிறைவடைந்தது! மொத்தம் {len(st.session_state.batch_results)} கோப்புகள் செயலாக்கப்பட்டன.")
+
+            # Case B: Single File Uploaded
+            else:
+                single_file = uploaded_files[0]
+                file_bytes = single_file.read()
+                file_name_lower = single_file.name.lower()
+
+                # PDF Page-wise OCR
+                if file_name_lower.endswith(".pdf"):
+                    page_count = ocr_engine.get_pdf_page_count(file_bytes)
+                    if page_count == 0:
+                        st.error("செல்லுபடியாகாத அல்லது பழுதடைந்த PDF ஆவணம்.")
+                    else:
+                        st.info(f"PDF ஆவணம் கண்டறியப்பட்டது: மொத்தம் {page_count} பக்கங்கள்.")
+                        pdf_mode = st.radio("PDF செயலாக்க முறை:", ["ஒற்றைப் பக்கம் (Single Page)", "அனைத்துப் பக்கங்களும் (Page-wise Full PDF)"], horizontal=True)
+                        if pdf_mode == "ஒற்றைப் பக்கம் (Single Page)":
+                            selected_page_idx = 0
+                            if page_count > 1:
+                                selected_page_idx = st.number_input("பக்க எண்:", min_value=1, max_value=page_count, value=1) - 1
+                            rendered_pdf = ocr_engine.render_pdf_page_to_image(file_bytes, page_number=selected_page_idx, dpi=200)
+                            if rendered_pdf:
+                                st.session_state.doc_image = rendered_pdf
+                                st.session_state.doc_name = single_file.name
+                                st.session_state.doc_info_str = f"PDF பக்கம் {selected_page_idx + 1} / {page_count} ({rendered_pdf.width} × {rendered_pdf.height} px)"
+                        else:
+                            if st.button("📖 பக்க வாரியாக முழு PDF-ஐ OCR செய் (Run Page-wise OCR)", use_container_width=True):
+                                with st.spinner(f"PDF-ன் {page_count} பக்கங்களையும் வரிசையாக OCR செயலாக்கம் செய்கிறது..."):
+                                    pages_to_run = list(range(page_count))
+                                    st.session_state.pdf_page_results = tamil_ai_features.process_pdf_page_wise(
+                                        file_bytes,
+                                        page_numbers=pages_to_run,
+                                        ocr_mode=ocr_mode,
+                                        tesseract_lang=tess_lang_option,
+                                        tesseract_path=tess_info.get("path"),
+                                    )
+                                st.success(f"முழு PDF பக்க வாரியான OCR நிறைவடைந்தது ({page_count} பக்கங்கள்)!")
+                elif file_name_lower.endswith(".docx"):
+                    doc_txt = ocr_engine.extract_text_from_docx_bytes(file_bytes)
+                    if doc_txt:
+                        rendered_docx = ocr_engine.render_text_as_manuscript_image(doc_txt)
+                        st.session_state.doc_image = rendered_docx
+                        st.session_state.doc_name = single_file.name
+                        st.session_state.doc_info_str = f"வேர்ட் ஆவணம் (Word DOCX): {single_file.name} ({len(doc_txt.split())} சொற்கள்)"
+                        st.session_state.tess_result = {
+                            "text": doc_txt,
+                            "success": True,
+                            "elapsed_seconds": 0.05,
+                            "char_count": len(doc_txt),
+                            "word_count": len(doc_txt.split()),
+                        }
+                        st.success(f"DOCX உரை வெற்றிகரமாகப் பெறப்பட்டது ({len(doc_txt.split())} சொற்கள்)!")
+                    else:
+                        st.error("DOCX ஆவணத்திலிருந்து உரையைப் பிரித்தெடுக்க முடியவில்லை.")
+                elif file_name_lower.endswith(".txt"):
+                    txt_content = file_bytes.decode("utf-8", errors="ignore")
+                    rendered_txt = ocr_engine.render_text_as_manuscript_image(txt_content)
+                    st.session_state.doc_image = rendered_txt
+                    st.session_state.doc_name = single_file.name
+                    st.session_state.doc_info_str = f"உரை ஆவணம் (Text TXT): {single_file.name} ({len(txt_content.split())} சொற்கள்)"
+                    st.session_state.tess_result = {
+                        "text": txt_content,
+                        "success": True,
+                        "elapsed_seconds": 0.02,
+                        "char_count": len(txt_content),
+                        "word_count": len(txt_content.split()),
+                    }
+                    st.success(f"TXT உரை வெற்றிகரமாகப் பெறப்பட்டது ({len(txt_content.split())} சொற்கள்)!")
+                else:
+                    try:
+                        loaded_img = Image.open(io.BytesIO(file_bytes)).convert("RGB")
+                        st.session_state.doc_image = loaded_img
+                        st.session_state.doc_name = single_file.name
+                        st.session_state.doc_info_str = f"படம்: {single_file.name} ({loaded_img.width} × {loaded_img.height} px)"
+                    except Exception as read_err:
+                        st.error(f"ஆவணத்தைத் திறக்க முடியவில்லை: {str(read_err)}")
+
+        if st.session_state.doc_image is not None:
+            st.markdown(
+                f"""
+                <div style='background: #24160E; border: 1px solid #734F27; padding: 10px 14px; border-radius: 6px; margin-top: 12px;'>
+                    <b style='color: #D4AF37;'>செயலில் உள்ள ஆவணம்:</b> {st.session_state.doc_info_str}
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    with col_preview:
+        st.markdown(
+            """
+            <div class="panel-card">
+                <div class="panel-card-title">👁️ ஆவண முன்னோட்டம் (Document Preview)</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        doc_img = st.session_state.doc_image
+
+        if doc_img is not None:
+            enhanced_img = ocr_engine.preprocess_image(
+                doc_img,
+                to_grayscale=to_grayscale,
+                contrast_factor=contrast_val,
+                sharpness_factor=sharpness_val,
+                scale_factor=scale_val,
+                denoise=denoise_val,
+                binarize=binarize_val,
+            )
+            tab_orig, tab_enh = st.tabs(["அசல் படம் (Original)", "சீரமைத்த படம் (Preprocessed)"])
+            with tab_orig:
+                st.image(doc_img, use_container_width=True)
+            with tab_enh:
+                st.image(enhanced_img, use_container_width=True)
+        else:
+            st.markdown(
+                """
+                <div class="empty-preview-box">
+                    <div class="empty-preview-icon">📜</div>
+                    <div class="empty-preview-text">ஆவண முன்னோட்டம் காத்திருக்கிறது</div>
+                    <div class="empty-preview-sub">
+                        இடதுபுறத்தில் உள்ள பதிவேற்றக் கட்டத்தில் படத்தையோ அல்லது PDF ஆவணத்தையோ சேர்க்கவும்.<br>
+                        அல்லது <b>"மாதிரி ஆவணம்"</b> பொத்தானை அழுத்தி உடனடியாகப் பரிசோதிக்கலாம்.
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    # Display Batch OCR Results If Available
+    if st.session_state.batch_results:
+        st.markdown("---")
+        st.markdown("### 📦 தொகுதி OCR முடிவுகள் (Batch OCR Results)")
+        for b_idx, b_item in enumerate(st.session_state.batch_results):
+            with st.expander(f"📄 {b_idx + 1}. {b_item['filename']} ({b_item['word_count']} சொற்கள், {b_item['elapsed_seconds']}s)"):
+                if b_item["success"]:
+                    st.text_area(f"உரை ({b_item['filename']}):", value=b_item["text"], height=140, key=f"b_txt_{b_idx}")
+                    st.download_button("📥 பதிவிறக்கம் (TXT)", data=b_item["text"].encode("utf-8"), file_name=f"{Path(b_item['filename']).stem}_ocr.txt", mime="text/plain; charset=utf-8", key=f"dl_b_{b_idx}")
+                else:
+                    st.error(f"பிழை: {b_item['error']}")
+
+    # Display PDF Page-Wise Results If Available
+    if st.session_state.pdf_page_results:
+        st.markdown("---")
+        st.markdown("### 📖 PDF பக்க வாரியான OCR முடிவுகள் (Page-wise PDF Results)")
+        pdf_tabs = st.tabs([f"பக்கம் {p['page_number']}" for p in st.session_state.pdf_page_results])
+        for p_idx, p_res in enumerate(st.session_state.pdf_page_results):
+            with pdf_tabs[p_idx]:
+                p_c1, p_c2 = st.columns([1, 2])
+                with p_c1:
+                    if p_res["image"]:
+                        st.image(p_res["image"], caption=f"பக்கம் {p_res['page_number']} படம்", use_container_width=True)
+                with p_c2:
+                    st.metric("சொற்கள்", p_res["word_count"])
+                    st.text_area(f"பக்கம் {p_res['page_number']} உரை:", value=p_res["text"], height=200, key=f"pdf_txt_{p_idx}")
+                    st.download_button(f"📥 பக்கம் {p_res['page_number']} உரை (TXT)", data=p_res["text"].encode("utf-8"), file_name=f"page_{p_res['page_number']}_ocr.txt", mime="text/plain; charset=utf-8", key=f"dl_pdf_{p_idx}")
+
+    # OCR Execution Action Section
+    st.markdown("---")
+
+    if st.session_state.doc_image is not None:
+        active_image = ocr_engine.preprocess_image(
+            st.session_state.doc_image,
+            to_grayscale=to_grayscale,
+            contrast_factor=contrast_val,
+            sharpness_factor=sharpness_val,
+            scale_factor=scale_val,
+            denoise=denoise_val,
+            binarize=binarize_val,
+        )
+
+        btn_r1, btn_r2, btn_r3 = st.columns([1, 2, 1])
+        with btn_r2:
+            st.markdown("<div class='btn-run-ocr'>", unsafe_allow_html=True)
+            run_ocr_action = st.button("✨ OCR செயலாக்கம் (Run OCR)", use_container_width=True, type="primary")
+            st.markdown("</div>", unsafe_allow_html=True)
+
+        if run_ocr_action:
+            # 1. Tesseract
+            if ocr_mode in ["📜 Tesseract OCR", "⚖️ இரண்டையும் ஒப்பிடுக (Compare Both)"]:
+                with st.spinner("Tesseract OCR கொண்டு தமிழ் எழுத்துக்களைப் பிரித்தெடுக்கிறது..."):
+                    tess_res = ocr_engine.run_tesseract_ocr(active_image, lang=tess_lang_option, tesseract_path=tess_info.get("path"))
+                    st.session_state.tess_result = tess_res
+
+                    # Extract authentic confidence
+                    conf_data = tamil_ai_features.extract_ocr_confidence(active_image, lang=tess_lang_option, tesseract_path=tess_info.get("path"))
+                    st.session_state.tess_confidence_data = conf_data
+
+                    # History log
+                    st.session_state.ocr_history = tamil_ai_features.manage_ocr_history(
+                        st.session_state.ocr_history,
+                        action="add",
+                        new_entry={"filename": st.session_state.doc_name or "மாதிரி ஆவணம்", "ocr_mode": "Tesseract OCR", "word_count": tess_res.get("word_count", 0), "char_count": tess_res.get("char_count", 0), "text": tess_res.get("text", "")},
+                    )
+
+            # 2. Vision Transformer
+            if ocr_mode in ["🤖 AI Model OCR (Vision Transformer)", "⚖️ இரண்டையும் ஒப்பிடுக (Compare Both)"]:
+                if use_hf_cloud and hf_token_input:
+                    with st.spinner("Hugging Face Cloud API (Qwen2.5-VL) மூலம் செயலாக்குகிறது..."):
+                        ai_res = ai_ocr.extract_via_hf_cloud_api(active_image, model_id="sair390/tamil-ocr-qwen25vl", hf_token=hf_token_input)
+                        st.session_state.ai_result = ai_res
+                else:
+                    with st.spinner("Hugging Face Vision Transformer AI மாதிரி கொண்டு செயலாக்குகிறது..."):
+                        pipeline = get_cached_ai_ocr(device_preference="auto")
+                        if pipeline["success"]:
+                            ai_res = ai_ocr.extract_tamil_text_ai(active_image, model=pipeline["model"], processor=pipeline["processor"], device=pipeline["device"], auto_slice=True)
+                            st.session_state.ai_result = ai_res
+                        else:
+                            st.session_state.ai_result = {"text": "", "elapsed_seconds": 0.0, "success": False, "error": pipeline["error"], "char_count": 0, "word_count": 0}
+
+                if st.session_state.ai_result:
+                    st.session_state.ocr_history = tamil_ai_features.manage_ocr_history(
+                        st.session_state.ocr_history,
+                        action="add",
+                        new_entry={"filename": st.session_state.doc_name or "மாதிரி ஆவணம்", "ocr_mode": "Vision Transformer AI", "word_count": st.session_state.ai_result.get("word_count", 0), "char_count": st.session_state.ai_result.get("char_count", 0), "text": st.session_state.ai_result.get("text", "")},
+                    )
+
+    # Results Workspace
+    tess_out = st.session_state.get("tess_result")
+    ai_out = st.session_state.get("ai_result")
+    conf_data = st.session_state.get("tess_confidence_data")
+
+    if tess_out is not None or ai_out is not None:
+        st.markdown("<h3 style='margin-top: 20px;'>📝 பிரித்தெடுக்கப்பட்ட உரை (Recognized Tamil Text)</h3>", unsafe_allow_html=True)
+
+        current_primary_text = ""
+        if ocr_mode == "📜 Tesseract OCR" and tess_out:
+            current_primary_text = tess_out.get("text", "")
+        elif ocr_mode == "🤖 AI Model OCR (Vision Transformer)" and ai_out:
+            current_primary_text = ai_out.get("text", "")
+        elif tess_out and tess_out.get("text"):
+            current_primary_text = tess_out.get("text", "")
+        elif ai_out and ai_out.get("text"):
+            current_primary_text = ai_out.get("text", "")
+
+        # OCR Confidence and Uncertainty Matrix Card
+        st.markdown("#### 🎯 OCR துல்லியம் மற்றும் நம்பிக்கை மதிப்பீடு (OCR Confidence & Uncertainty)")
+        if conf_data and conf_data.get("success"):
+            c_m1, c_m2, c_m3 = st.columns(3)
+            with c_m1:
+                st.metric("சராசரி நம்பிக்கை (Average Confidence)", f"{conf_data['average_confidence']}%")
+            with c_m2:
+                st.metric("மதிப்பாய்வு செய்யப்பட்ட சொற்கள்", conf_data["total_words_recognized"])
+            with c_m3:
+                st.metric("சந்தேகத்திற்குரிய சொற்கள் (<70%)", conf_data["low_confidence_words_count"])
+
+            if conf_data["low_confidence_words_count"] > 0:
+                with st.expander("⚠️ சரிபார்க்கப்பட வேண்டிய சொற்கள் (Words Needing Review)", expanded=False):
+                    low_words = [w["word"] for w in conf_data["words"] if w["needs_review"]]
+                    st.write(", ".join(f"`{w}`" for w in low_words[:30]))
+        else:
+            st.info("💡 **நம்பிக்கை மதிப்பீடு தகவல்:** Vision Transformer மாதிரியில் சொல்-மட்ட நம்பிக்கை அணி கிடைக்காது; வரி-மட்ட உருவாக்க டோக்கன்கள் பயன்படுத்தப்படுகின்றன.")
+
+        # Dual OCR Comparison Mode
+        if ocr_mode == "⚖️ இரண்டையும் ஒப்பிடுக (Compare Both)" and (tess_out is not None or ai_out is not None):
+            c_left, c_right = st.columns(2, gap="large")
+            with c_left:
+                st.markdown("<div class='panel-card-title'>📜 Tesseract OCR</div>", unsafe_allow_html=True)
+                tess_txt = tess_out["text"] if tess_out else ""
+                tess_edit = st.text_area("Tesseract வெளியீடு:", value=tess_txt, height=200, key="tab1_cmp_tess")
+            with c_right:
+                st.markdown("<div class='panel-card-title'>🤖 AI Model OCR</div>", unsafe_allow_html=True)
+                ai_txt = ai_out["text"] if ai_out else ""
+                ai_edit = st.text_area("AI வெளியீடு:", value=ai_txt, height=200, key="tab1_cmp_ai")
+
+            if tess_edit or ai_edit:
+                comp_res = tamil_ai_features.compare_dual_ocr(tess_edit, ai_edit)
+                m1, m2, m3 = st.columns(3)
+                with m1:
+                    st.metric("ஒற்றுமை சதவீதம் (Similarity)", f"{comp_res['similarity_percentage']}%")
+                with m2:
+                    st.metric("எழுத்து வேறுபாடு (Char Diff)", comp_res["char_diff"])
+                with m3:
+                    st.metric("சொல் வேறுபாடு (Word Diff)", comp_res["word_diff"])
+
+                with st.expander("🔍 விரிவான வரி ஒப்பீடு (Unified Diff)", expanded=False):
+                    if comp_res["diff_lines"]:
+                        st.code("\n".join(comp_res["diff_lines"]), language="diff")
+                    else:
+                        st.success("இரு வெளியீடுகளும் முற்றிலும் ஒத்துள்ளன!")
+
+        # Main Editable Text Area & Export Section
+        st.markdown("#### ✍️ திருத்தக்கூடிய முதன்மை உரை (Editable Text & Export)")
+        active_edited_text = st.text_area("பிரித்தெடுக்கப்பட்ட உரையை இங்கே சரிசெய்து திருத்தலாம்:", value=current_primary_text, height=220, key="tab1_main_editor")
+
+        exp_c1, exp_c2, exp_c3 = st.columns([1, 1, 2])
+        with exp_c1:
+            st.download_button(label="📥 உரையைப் பதிவிறக்கு (UTF-8 TXT)", data=active_edited_text.encode("utf-8"), file_name=f"{Path(st.session_state.doc_name).stem if st.session_state.doc_name else 'tamil_heritage'}_ocr.txt", mime="text/plain; charset=utf-8", use_container_width=True)
+        with exp_c2:
+            export_pack = tamil_ai_features.export_recognized_text(active_edited_text, base_filename=st.session_state.doc_name or "tamil_heritage", metadata={"ocr_mode": ocr_mode, "tesseract_lang": tess_lang_option})
+            st.download_button(label="📦 மெட்டாடேட்டா பதிவிறக்கு (JSON)", data=export_pack["json_bytes"], file_name=export_pack["json_filename"], mime="application/json; charset=utf-8", use_container_width=True)
+
+        # Smart Tamil Voice (Text-to-Speech) Section
+        st.markdown("---")
+        st.markdown("#### 🔊 திறன்மிகு தமிழ்க் குரல் (Smart Tamil Voice — Text to Speech)")
+        st.caption(
+            "அசல் OCR வெளியீட்டையோ அல்லது திருத்தப்பட்ட தமிழ் உரையையோ உண்மையான தமிழ்க் குரலில் உரக்கக் கேட்கலாம். "
+            "நீளமான சுவடிகளையும் வரிசை மாறாமல் வாசிக்கும் திறன் கொண்டது."
+        )
+
+        v_status = tamil_voice.check_voice_engine_status()
+        if v_status["internet_connected"]:
+            st.markdown(
+                """
+                <div style='background: #1B2B1B; border: 1px solid #2E7D32; border-left: 4px solid #4CAF50; padding: 8px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.92rem; color: #C8E6C9;'>
+                    🌐 <b>குரல் இயந்திரம்:</b> Google Neural Tamil Voice (உண்மையான தமிழ் உச்சரிப்பு தயார்) | <b>முறை:</b> ஆன்லைன் (Online)
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        else:
+            st.warning(f"⚠️ {v_status['status_message']}")
+
+        vc1, vc2 = st.columns([1, 1])
+        with vc1:
+            voice_speed_choice = st.radio(
+                "குரல் வேகம் (Speech Speed):",
+                ["இயல்பான வேகம் (1.0x)", "மெதுவான வாசிப்பு (0.8x - சுவடி படிப்பு முறை)"],
+                horizontal=True,
+                key="tab1_voice_speed",
+            )
+        with vc2:
+            st.caption("💡 Streamlit ஆடியோ பிளேயரில் **Play, Pause, Resume, Stop, Scrub** மற்றும் **வேகக் கட்டுப்பாடு** நேரடியாகக் கிடைக்கும்.")
+
+        v_btn_col1, v_btn_col2, v_btn_col3 = st.columns([2, 1, 1])
+        with v_btn_col1:
+            run_voice = st.button("🔊 உரையை வாசித்துக் காட்டு (Read Text Aloud)", key="btn_run_voice_tab1", type="primary")
+        with v_btn_col2:
+            stop_voice = st.button("⏹️ ஆடியோவை நீக்கு (Clear Audio)", key="btn_stop_voice_tab1")
+
+        if stop_voice:
+            st.session_state.voice_audio_bytes = None
+            st.session_state.voice_info = None
+            st.rerun()
+
+        if run_voice:
+            if not active_edited_text.strip():
+                st.warning("வாசிப்பதற்கு உரை காலியாக உள்ளது. ஆவணத்தை OCR செய்யவும் அல்லது உரையை தட்டச்சு செய்யவும்.")
+            else:
+                is_slow = voice_speed_choice.startswith("மெதுவான")
+                with st.spinner("உண்மையான தமிழ்க் குரல் ஆடியோ உருவாக்கப்படுகிறது..."):
+                    v_res = tamil_voice.synthesize_tamil_speech(active_edited_text, slow=is_slow)
+                    if v_res["success"]:
+                        st.session_state.voice_audio_bytes = v_res["audio_bytes"]
+                        st.session_state.voice_info = v_res
+                        st.success(f"தமிழ்க் குரல் ஆடியோ தயார் ({v_res['word_count']} சொற்கள், ~{v_res['duration_est_seconds']} விநாடிகள்)!")
+                    else:
+                        st.error(v_res["error"])
+
+        if st.session_state.get("voice_audio_bytes") is not None:
+            st.audio(st.session_state.voice_audio_bytes, format="audio/mp3", autoplay=False, key="main_workspace_audio_player")
+            v_info = st.session_state.get("voice_info", {})
+            dl_c1, dl_c2 = st.columns([1, 2])
+            with dl_c1:
+                st.download_button(
+                    "📥 ஆடியோ பதிவிறக்கம் (MP3)",
+                    data=st.session_state.voice_audio_bytes,
+                    file_name=f"{Path(st.session_state.doc_name).stem if st.session_state.doc_name else 'tamil_voice'}.mp3",
+                    mime="audio/mp3",
+                    key="tab1_dl_mp3",
+                    use_container_width=True,
+                )
+            with dl_c2:
+                if v_info:
+                    st.caption(f"குரல்: {v_info.get('engine', 'gTTS')} | வேகம்: {v_info.get('speed', '1.0x')} | எழுத்துக்கள்: {v_info.get('char_count', 0)}")
+
+        # Long document chunk-by-chunk reading option
+        if active_edited_text.strip() and len(active_edited_text) > 150:
+            with st.expander("📖 பத்தி வாரியாகப் பிரித்து வாசித்தல் (Read Chunk-by-Chunk for Long Manuscripts)", expanded=False):
+                chunks = tamil_voice.chunk_tamil_text_for_voice(active_edited_text, max_chunk_chars=350)
+                st.caption(f"நீண்ட ஆவணம் {len(chunks)} தொடர்ச்சியான பகுதிகளாகப் பிரிக்கப்பட்டுள்ளது (வாசிப்பு வரிசை பாதுகாக்கப்பட்டு உள்ளது):")
+                for ch_idx, chunk in enumerate(chunks, start=1):
+                    ch_col1, ch_col2 = st.columns([3, 1])
+                    with ch_col1:
+                        st.write(f"**பகுதி {ch_idx}:** {chunk}")
+                    with ch_col2:
+                        if st.button(f"🔊 பகுதி {ch_idx} கேள்", key=f"btn_chunk_play_{ch_idx}"):
+                            with st.spinner(f"பகுதி {ch_idx} தயாரிக்கப்படுகிறது..."):
+                                ch_res = tamil_voice.synthesize_tamil_speech(chunk, slow=(voice_speed_choice.startswith("மெதுவான")))
+                                if ch_res["success"]:
+                                    st.audio(ch_res["audio_bytes"], format="audio/mp3", autoplay=False, key=f"audio_chunk_{ch_idx}")
+                                else:
+                                    st.error(ch_res["error"])
+
+
+
+
+# =====================================================================
+# TAB 2: சுவடி AI உதவியாளர் (Feature 1: Evidence-Grounded AI Manuscript Assistant)
+# =====================================================================
+with tab_assistant:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #24160E 0%, #1A0F0A 100%); border: 1.5px solid #734F27; border-left: 5px solid #E6CA65; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #E6CA65;">🤖 சுவடி AI உதவியாளர் (Evidence-Grounded AI Manuscript Assistant)</h3>
+            <p style="margin: 6px 0 0 0; color: #C8AC82; font-size: 0.95rem;">
+                பழமையான ஓலைச்சுவடிகள், செப்பேடுகள் மற்றும் வரலாற்று நூல்களுக்கான <b>சான்று-சார்ந்த AI உதவியாளர்</b>. 
+                ஆவணத்திலுள்ள உண்மையான சான்றுகளின் அடிப்படையில் மட்டுமே பதிலளிக்கும்; கற்பனையான அல்லது போலியான தகவல்களை ஒருபோதும் தராது.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # 1. Document Selection: Digital Library or Live OCR
+    doc_options = {
+        "thanjavur_inscription": "🏛️ தஞ்சைப் பெரிய கோயில் கல்வெட்டு (Brihadisvara Temple Inscription - 1010 CE)",
+        "tolkappiyam": "📜 தொல்காப்பியம் பாயிரச் சுவடி (Tolkappiyam Sangam Grammar)",
+        "silappadikaram": "🌊 சிலப்பதிகாரம் கானல்வரி ஏடு (Silappadikaram Epic)",
+        "tirukkural_commentary": "📖 திருக்குறள் பரிமேலழகர் உரை ஏடு (Tirukkural Palm-leaf)",
+    }
+    
+    tess_for_ast = st.session_state.get("tess_result")
+    ai_for_ast = st.session_state.get("ai_result")
+    live_ocr_text = ""
+    if tess_for_ast and tess_for_ast.get("text"):
+        live_ocr_text = tess_for_ast["text"]
+    elif ai_for_ast and ai_for_ast.get("text"):
+        live_ocr_text = ai_for_ast["text"]
+
+    if live_ocr_text.strip():
+        doc_options["live_ocr"] = f"📑 நடப்பு OCR ஆவணம் ({st.session_state.get('doc_name') or 'ஸ்கேன் செய்யப்பட்ட சுவடி'})"
+
+    selected_doc_key = st.selectbox(
+        "📚 ஆய்வு செய்ய வேண்டிய சுவடி / நூலைத் தேர்ந்தெடுக்கவும் (Select Manuscript):",
+        options=list(doc_options.keys()),
+        format_func=lambda k: doc_options[k],
+        key="assistant_doc_selector",
+    )
+
+    # Determine Active Document Text & Title
+    if selected_doc_key == "live_ocr":
+        active_doc_title = st.session_state.get("doc_name") or "நடப்பு OCR ஆவணம்"
+        active_doc_text = live_ocr_text
+        doc_meta = {
+            "era": "நடப்பு ஸ்கேன் செய்யப்பட்ட ஆவணம்",
+            "category": "OCR பிரித்தெடுத்த உரை",
+            "description": "Tab 1 சுவடி ஸ்கேனர் மூலம் பெறப்பட்ட உண்மையான உரை.",
+        }
+    else:
+        lib_entry = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[selected_doc_key]
+        active_doc_title = lib_entry["title"]
+        active_doc_text = lib_entry["text"]
+        doc_meta = lib_entry
+
+    col_meta1, col_meta2 = st.columns([2, 1])
+    with col_meta1:
+        st.markdown(f"**காலம் / மரபு:** `{doc_meta.get('era', '-')}` | **வகை:** `{doc_meta.get('category', '-')}`")
+        st.caption(doc_meta.get("description", ""))
+    with col_meta2:
+        with st.expander("📜 மூல சுவடி உரை (View Source Text)", expanded=False):
+            st.text_area("ஆவண உரை:", value=active_doc_text, height=140, disabled=True, key="assistant_raw_text_view")
+
+    st.markdown("##### 💡 பரிந்துரைக்கப்படும் வரலாற்று வினாக்கள் (Suggested Questions):")
+    suggested_map = {
+        "thanjavur_inscription": [
+            "தஞ்சைப் பெரிய கோயிலைக் கட்டியவர் யார்?",
+            "கோயிலின் தலைமைத் தச்சராக நியமிக்கப்பட்டவர் யார்?",
+            "இக்கோயில் எந்த ஆண்டு கட்டி முடிக்கப்பட்டது?",
+            "கோயிலின் மூலவர் மற்றும் விமானத்தின் பெயர்கள் என்ன?",
+        ],
+        "tolkappiyam": [
+            "தொல்காப்பியத்தை இயற்றியவர் யார்?",
+            "தொல்காப்பியத்தில் உள்ள அதிகாரங்கள் எத்தனை?",
+            "பொருள் அதிகாரம் எதனை விளக்குகிறது?",
+            "தொல்காப்பியம் கூறும் நில எல்லைகள் யாவை?",
+        ],
+        "silappadikaram": [
+            "சிலப்பதிகாரத்தை இயற்றியவர் யார்?",
+            "கோவலன் மற்றும் கண்ணகி வாழ்ந்த நகரம் எது?",
+            "சிலப்பதிகாரம் கூறும் முப்பெரும் உண்மைகள் யாவை?",
+            "கோவலன் மதுரையை நோக்கி ஏன் சென்றான்?",
+        ],
+        "tirukkural_commentary": [
+            "திருக்குறளை இயற்றியவர் யார்?",
+            "திருக்குறளில் எத்தனை அதிகாரங்கள் மற்றும் குறட்பாக்கள் உள்ளன?",
+            "திருக்குறளின் சிறந்த உரையாகப் போற்றப்படுவது யாருடைய உரை?",
+            "திருக்குறளின் முப்பால்கள் யாவை?",
+        ],
+    }
+    sample_qs = suggested_map.get(selected_doc_key, [
+        "இந்த ஆவணத்தின் ஆசிரியர் யார்?",
+        "இதில் குறிப்பிடப்பட்டுள்ள முக்கிய இடங்கள் எவை?",
+        "இந்த ஆவணத்தின் முக்கிய செய்தி என்ன?",
+    ])
+
+    chip_cols = st.columns(len(sample_qs))
+    for idx, (c, sq) in enumerate(zip(chip_cols, sample_qs)):
+        with c:
+            if st.button(sq, key=f"chip_q_{idx}", use_container_width=True):
+                st.session_state["assistant_query_input"] = sq
+
+    query_text = st.text_input(
+        "❓ ஆவணம் குறித்த உங்கள் வினாவை உள்ளிடவும் (Ask a question about the manuscript):",
+        value=st.session_state.get("assistant_query_input", ""),
+        key="assistant_query_box",
+        placeholder="எ.கா: தஞ்சைப் பெரிய கோயிலைக் கட்டியவர் யார்?",
+    )
+
+    btn_ask_col1, btn_ask_col2 = st.columns([1, 4])
+    with btn_ask_col1:
+        run_query = st.button("🚀 கேள்வியைக் கேள் (Ask)", type="primary", use_container_width=True, key="btn_run_assistant")
+    with btn_ask_col2:
+        if st.button("🗑️ உரையாடலை அழி (Clear Chat)", key="btn_clear_assistant"):
+            st.session_state.assistant_chat_history = []
+            st.rerun()
+
+    if run_query and query_text.strip():
+        with st.spinner("ஆவணத்தின் வாக்கியங்களை ஆராய்ந்து சான்றுகளைத் தேடுகிறது..."):
+            ans_res = manuscript_assistant.ask_manuscript_assistant(
+                active_doc_text,
+                query_text.strip(),
+                document_title=active_doc_title,
+            )
+            st.session_state.assistant_chat_history.append({
+                "question": query_text.strip(),
+                "doc_title": active_doc_title,
+                "result": ans_res,
+            })
+
+    if st.session_state.assistant_chat_history:
+        st.markdown("---")
+        st.markdown("#### 💬 விடை & வரலாற்றுச் சான்றுகள் (Evidence-Grounded Answers):")
+        for idx, chat_item in enumerate(reversed(st.session_state.assistant_chat_history)):
+            q = chat_item["question"]
+            res = chat_item["result"]
+
+            st.markdown(
+                f"""
+                <div style="background: #1C130D; border: 1px solid #734F27; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px;">
+                    <div style="font-size: 0.85rem; color: #D4AF37;"><b>கேள்வி #{len(st.session_state.assistant_chat_history) - idx}</b> | ஆவணம்: <i>{chat_item['doc_title']}</i></div>
+                    <div style="font-size: 1.05rem; font-weight: 600; color: #FFF; margin: 4px 0 10px 0;">❓ {q}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            if res["found"]:
+                # Feature 9: Source Traceability & Trust Layer Audit
+                trust_audit = source_trust_layer.audit_claim_traceability(
+                    res["answer_tamil"],
+                    active_doc_text,
+                    selected_doc_key,
+                    active_doc_title,
+                )
+                trust_badge_html = source_trust_layer.render_traceability_badge(trust_audit)
+
+                st.markdown(
+                    f"""
+                    <div style="background: rgba(30, 45, 30, 0.7); border: 1.5px solid #2E7D32; border-left: 5px solid #81C784; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px;">
+                        <div style="color: #81C784; font-weight: bold; font-size: 0.9rem;">✅ ஆவணச் சான்றுடன் கூடிய தமிழ் விடை (Confidence: {res['confidence_percentage']})</div>
+                        <div style="color: #F5E8D0; font-size: 1.05rem; margin-top: 6px; line-height: 1.6;">{res['answer_tamil']}</div>
+                        <div style="margin-top: 8px;">{trust_badge_html}</div>
+                        <div style="color: #C8AC82; font-size: 0.88rem; margin-top: 8px; border-top: 1px dashed #43A047; padding-top: 6px;">
+                            <b>Historical Context (English):</b> {res['explanation_english']}
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+                if res["supporting_passages"]:
+                    with st.expander(f"📜 உறுதிப்படுத்தும் ஆவணச் சான்றுகள் ({len(res['supporting_passages'])} Evidence Passages)", expanded=True):
+                        for p in res["supporting_passages"]:
+                            st.markdown(
+                                f"""
+                                <div style="background: #1A120B; border: 1px solid #5D4037; border-radius: 6px; padding: 10px 14px; margin-bottom: 8px;">
+                                    <span style="color: #E6CA65; font-weight: bold;">வாக்கிய எண் #{p['passage_number']}</span> | 
+                                    <span style="color: #A5D6A7;">பொருத்தம்: {int(p['score']*100)}%</span> | 
+                                    <small style="color: #BCAAA4;">பொருந்திய சொற்கள்: {', '.join(p['matched_keywords'])}</small>
+                                    <div style="color: #ECEFF1; margin-top: 4px; font-style: italic;">"{p['text']}"</div>
+                                </div>
+                                """,
+                                unsafe_allow_html=True,
+                            )
+            else:
+                st.markdown(
+                    f"""
+                    <div style="background: rgba(45, 25, 25, 0.7); border: 1.5px solid #C62828; border-left: 5px solid #EF5350; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px;">
+                        <div style="color: #EF5350; font-weight: bold; font-size: 0.9rem;">🚫 சான்று காணப்படவில்லை (Zero Hallucination Refusal)</div>
+                        <div style="color: #FFCDD2; font-size: 0.98rem; margin-top: 6px;">{res['answer_tamil']}</div>
+                        <div style="color: #B0BEC5; font-size: 0.85rem; margin-top: 6px;">{res['explanation_english']}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+
+# =====================================================================
+# TAB 3: அறிவு வரைபடம் & ஆய்வு (Feature 2: Tamil Knowledge Explorer)
+# =====================================================================
+with tab_explorer:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #121929 0%, #0F1420 100%); border: 1.5px solid #1E3A5F; border-left: 5px solid #4FC3F7; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #4FC3F7;">🕸️ தமிழ் அறிவு வரைபடம் & ஆய்வு (Tamil Knowledge Explorer)</h3>
+            <p style="margin: 6px 0 0 0; color: #B0BEC5; font-size: 0.95rem;">
+                ஓலைச்சுவடி மற்றும் கல்வெட்டு உரைகளில் இடம்பெறும் <b>வரலாற்று மனிதர்கள், நூல்கள், இடங்கள் மற்றும் கருத்துக்களை</b> 
+                பிரித்தெடுத்து, சான்றுடைய தொடர்புகளுடன் கூடிய <b>ஊடாடும் அறிவு வரைபடமாக (Interactive Knowledge Graph)</b> காட்சிப்படுத்துகிறது.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    exp_doc_options = {
+        "thanjavur_inscription": "🏛️ தஞ்சைப் பெரிய கோயில் கல்வெட்டு (Brihadisvara Temple Inscription)",
+        "tolkappiyam": "📜 தொல்காப்பியம் பாயிரச் சுவடி (Tolkappiyam Sangam Grammar)",
+        "silappadikaram": "🌊 சிலப்பதிகாரம் கானல்வரி ஏடு (Silappadikaram Epic)",
+        "tirukkural_commentary": "📖 திருக்குறள் பரிமேலழகர் உரை ஏடு (Tirukkural Palm-leaf)",
+    }
+    if live_ocr_text.strip():
+        exp_doc_options["live_ocr"] = f"📑 நடப்பு OCR ஆவணம் ({st.session_state.get('doc_name') or 'ஸ்கேன் உரை'})"
+
+    selected_exp_doc = st.selectbox(
+        "📚 அறிவு வரைபடம் உருவாக்க வேண்டிய ஆவணத்தைத் தேர்ந்தெடுக்கவும்:",
+        options=list(exp_doc_options.keys()),
+        format_func=lambda k: exp_doc_options[k],
+        key="explorer_doc_selector",
+    )
+
+    if selected_exp_doc == "live_ocr":
+        exp_text = live_ocr_text
+        exp_title = st.session_state.get("doc_name") or "நடப்பு OCR ஆவணம்"
+    else:
+        exp_text = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[selected_exp_doc]["text"]
+        exp_title = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[selected_exp_doc]["title"]
+
+    with st.expander("📜 ஆய்வு செய்யப்படும் ஆவண உரை (View Manuscript Text)", expanded=False):
+        st.write(exp_text)
+
+    if st.button("🚀 அறிவு வரைபடத்தை உருவாக்கு (Generate Knowledge Graph)", type="primary", key="btn_run_graph"):
+        with st.spinner("சுவடி உரையில் வரலாற்று உருப்படிகளையும் தொடர்புகளையும் பிரித்தெடுக்கிறது..."):
+            st.session_state.explorer_graph_cache = knowledge_explorer.run_knowledge_explorer(exp_text)
+
+    if st.session_state.explorer_graph_cache is None:
+        st.session_state.explorer_graph_cache = knowledge_explorer.run_knowledge_explorer(exp_text)
+
+    graph_res = st.session_state.explorer_graph_cache
+    if graph_res and graph_res["success"]:
+        m1, m2, m3, m4 = st.columns(4)
+        m1.metric("மொத்த உருப்படிகள் (Entities)", graph_res["total_entities"])
+        m2.metric("மொத்த தொடர்புகள் (Relationships)", graph_res["total_relationships"])
+        direct_count = sum(1 for r in graph_res["relationships"] if r.get("is_direct_evidence"))
+        m3.metric("நேரடி ஆவணச் சான்றுகள் (Direct)", direct_count)
+        m4.metric("சூழல் அறிவுத் தொடர்புகள் (Inferences)", len(graph_res["relationships"]) - direct_count)
+
+        st.markdown("#### 🎨 ஊடாடும் அறிவு வரைபடம் (Interactive Knowledge Graph):")
+        st.components.v1.html(graph_res["graph_html"], height=480, scrolling=True)
+
+        st.markdown("---")
+        st.markdown("#### 🔍 உருப்படி வாரியான தொடர்பு ஆய்வு (Entity Relationship Explorer):")
+        ent_names = [e["name"] for e in graph_res["entities"]]
+        if ent_names:
+            chosen_ent_name = st.selectbox("ஆய்வு செய்ய வேண்டிய உருப்படியைத் தேர்ந்தெடுக்கவும் (Select Entity):", ent_names, key="chosen_graph_ent")
+            chosen_ent = next(e for e in graph_res["entities"] if e["name"] == chosen_ent_name)
+
+            col_e1, col_e2 = st.columns([1, 2])
+            with col_e1:
+                st.markdown(
+                    f"""
+                    <div style="background: #182232; border: 1.5px solid #2B4C7E; border-radius: 8px; padding: 14px 18px;">
+                        <h4 style="color: #4FC3F7; margin:0 0 6px 0;">{chosen_ent['name']}</h4>
+                        <div style="color: #90CAF9; font-weight:600;">{chosen_ent['label_ta']}</div>
+                        <div style="color: #B0BEC5; font-size: 0.88rem; margin-top: 6px;">வகை (Type): <code>{chosen_ent['type']}</code></div>
+                        <div style="color: #B0BEC5; font-size: 0.88rem;">ஆவணத்தில் வந்த எண்ணிக்கை: <b>{chosen_ent['frequency']}</b></div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+            with col_e2:
+                connected_rels = [
+                    r for r in graph_res["relationships"]
+                    if r["source"] == chosen_ent_name or r["target"] == chosen_ent_name
+                ]
+                if connected_rels:
+                    st.write(f"**இணைக்கப்பட்டுள்ள பிற உருப்படிகள் ({len(connected_rels)} தொடர்புகள்):**")
+                    for r in connected_rels:
+                        other_node = r["target"] if r["source"] == chosen_ent_name else r["source"]
+                        ev_color = "#4CAF50" if r.get("is_direct_evidence") else "#0288D1"
+                        st.markdown(
+                            f"""
+                            <div style="background: #131A26; border: 1px solid #2B3A50; border-left: 4px solid {ev_color}; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px;">
+                                <b>{chosen_ent_name}</b> ➔ <span style="color:#FFB300;">{r['relationship']}</span> ➔ <b>{other_node}</b><br>
+                                <small style="color: {ev_color}; font-weight: bold;">{r['evidence_level']}</small> | <small style="color: #B0BEC5;">வாக்கிய எண் #{r['sentence_number']}</small>
+                                <div style="color: #ECEFF1; font-size: 0.9rem; margin-top: 4px; font-style: italic;">"{r['supporting_passage']}"</div>
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
+                else:
+                    st.info("இந்த உருப்படியுடன் இணைக்கப்பட்ட பிற உருப்படிகள் எதுவும் நேரடியாகக் கண்டறியப்படவில்லை.")
+
+        with st.expander("💾 கட்டமைப்புத் தரவு (Structured JSON Export)", expanded=False):
+            st.json(graph_res["structured_graph"])
+
+
+# =====================================================================
+# TAB: சுவடி அறிவுப் பிணைப்பு (Feature 11: Cross-Manuscript Discovery)
+# =====================================================================
+with tab_cross_discovery:
+    st.markdown("### 🌐 பல சுவடி அறிவுப் பிணைப்பு (Cross-Manuscript Knowledge Discovery)")
+    st.caption("நூலகத்தில் உள்ள பல்வேறு வரலாற்றுச் சுவடிகள் மற்றும் கல்வெட்டுகளுக்கிடையிலான பொது உருப்படிகள், இணை வாசகங்கள் மற்றும் கருப்பொருள் தொடர்புகளைக் கண்டறிகிறது.")
+
+    # Strict Epigraphical Disclaimer Notice
+    st.markdown(
+        """
+        <div style="background: rgba(245, 158, 11, 0.1); border: 1.5px solid #F59E0B; border-radius: 8px; padding: 12px 18px; margin-bottom: 18px;">
+            <b style="color: #FBBF24;">⚠️ சான்றாதார எச்சரிக்கை (Epigraphical Rigor Notice):</b><br>
+            <span style="color: #FDE68A; font-size: 0.92rem;">
+            இரு சுவடிகளிலும் காணப்படும் பொதுமைப் பண்புகள் கருத்துக் கூற்றுகளின் தொடர்பைக் குறிக்கின்றனவே அன்றி, அவை ஒரே ஆசிரியர் இயற்றியவை என்றோ அல்லது நேரடி வரலாற்றுத் தொடர்பு உடையவை என்றோ நிரூபிக்காது.
+            </span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    doc_options = list(manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS.keys())
+    col_d1, col_d2 = st.columns([1, 1], gap="medium")
+    with col_d1:
+        sel_doc_a = st.selectbox(
+            "முதல் சுவடி / ஆவணம் (Manuscript A):",
+            options=doc_options,
+            index=0,
+            format_func=lambda x: f"{manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[x]['title']} ({manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[x]['era']})",
+            key="cross_sel_a",
+        )
+    with col_d2:
+        def_idx = 1 if len(doc_options) > 1 else 0
+        sel_doc_b = st.selectbox(
+            "இரண்டாம் சுவடி / ஆவணம் (Manuscript B):",
+            options=doc_options,
+            index=def_idx,
+            format_func=lambda x: f"{manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[x]['title']} ({manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[x]['era']})",
+            key="cross_sel_b",
+        )
+
+    if st.button("🔍 சுவடிகளுக்கிடையிலான தொடர்புகளைக் கண்டறி (Discover Connections)", key="btn_run_cross_discovery", use_container_width=True):
+        with st.spinner("சுவடிகளுக்கிடையிலான சொற்கள், உருப்படிகள் மற்றும் உரை ஒப்புமைகள் ஆராயப்படுகின்றன..."):
+            disc_res = cross_manuscript_discovery.discover_cross_manuscript_connections(
+                doc_id_a=sel_doc_a,
+                doc_id_b=sel_doc_b,
+                user_role=st.session_state.get("active_user_role", "CHIEF_EPIGRAPHIST"),
+            )
+            st.session_state.cross_discovery_result = disc_res
+
+    if st.session_state.cross_discovery_result:
+        res = st.session_state.cross_discovery_result
+        if not res.get("success"):
+            st.error(res.get("message", "தொடர்புகளைக் கண்டறிய இயலவில்லை."))
+        else:
+            # Metrics Row
+            m1, m2, m3, m4 = st.columns(4)
+            with m1:
+                st.metric("மொத்த இணைப்புகள்", res["total_connections"])
+            with m2:
+                st.metric("நேரடி வரலாற்று உருப்படிகள்", res["shared_entities_count"])
+            with m3:
+                sem_count = len([c for c in res["connections"] if c["connection_type"] == "SEMANTIC_SIMILARITY"])
+                st.metric("பொருள்சார் வாசக ஒப்புமை", sem_count)
+            with m4:
+                st.metric("பொதுவான கருப்பொருட்கள்", res["shared_themes_count"])
+
+            st.markdown("---")
+            st.markdown("#### 🔗 கண்டறியப்பட்ட சுவடிப் பிணைப்புகள் (Discovered Cross-Document Links):")
+
+            for idx, conn in enumerate(res["connections"], start=1):
+                c_type = conn["connection_type"]
+                badge_bg = conn["badge_color"]
+                badge_txt = conn["type_label_ta"]
+
+                st.markdown(
+                    f"""
+                    <div style="background: #1C120A; border: 1.5px solid #4D321A; border-left: 5px solid {badge_bg}; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="background: {badge_bg}; color: #FFF; font-weight: bold; font-size: 0.8rem; padding: 3px 10px; border-radius: 4px;">
+                                {badge_txt}
+                            </span>
+                            <span style="color: #C8AC82; font-size: 0.85rem;">
+                                நிலை: <b>{conn.get('verification_badge_ta', 'AI ஊகம்')}</b>
+                            </span>
+                        </div>
+                        <h4 style="color: #F8ECD5; margin: 4px 0 8px 0;">{idx}. {conn['concept_name']}</h4>
+                        <p style="color: #E6CA65; font-size: 0.93rem; margin-bottom: 10px;">
+                            <i>விளக்கம்:</i> {conn['interpretation_ta']}
+                        </p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;">
+                            <div style="background: #140C07; border: 1px solid #3A2412; padding: 10px 14px; border-radius: 6px;">
+                                <small style="color: #D4AF37; font-weight: bold;">📜 {conn['evidence_doc_a']['title']}:</small>
+                                <div style="color: #F5E8D0; font-size: 0.88rem; margin-top: 4px;">"{conn['evidence_doc_a']['passage']}"</div>
+                            </div>
+                            <div style="background: #140C07; border: 1px solid #3A2412; padding: 10px 14px; border-radius: 6px;">
+                                <small style="color: #D4AF37; font-weight: bold;">📜 {conn['evidence_doc_b']['title']}:</small>
+                                <div style="color: #F5E8D0; font-size: 0.88rem; margin-top: 4px;">"{conn['evidence_doc_b']['passage']}"</div>
+                            </div>
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+
+# =====================================================================
+# TAB: இலக்கியக் கருப்பொருள் (Feature 12: Tamil Literary Theme Analyzer)
+# =====================================================================
+with tab_theme:
+    st.markdown("### 📚 தமிழ் இலக்கியக் கருப்பொருள் ஆய்வாளர் (Tamil Literary Theme Analyzer)")
+    st.caption("சங்க இலக்கியம், காப்பியம், அறநெறி மற்றும் சோழர் கல்வெட்டுகளின் மூல வாசகங்களை மரபுசார் கருப்பொருட்களின் அடிப்படையில் தொகுத்து பகுப்பாய்வு செய்கிறது.")
+
+    lib_docs = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS
+    sel_theme_doc = st.selectbox(
+        "கருப்பொருள் ஆய்வு செய்ய வேண்டிய சுவடியைத் தேர்ந்தெடுக்கவும்:",
+        options=list(lib_docs.keys()),
+        index=0,
+        format_func=lambda x: f"{lib_docs[x]['title']} ({lib_docs[x]['era']})",
+        key="theme_doc_sel",
+    )
+
+    theme_doc_text = lib_docs[sel_theme_doc]["text"]
+    themes_analysis = cross_manuscript_discovery.analyze_document_themes(theme_doc_text, doc_id=sel_theme_doc)
+
+    if themes_analysis["success"] and themes_analysis["detected_themes"]:
+        st.markdown(f"**கண்டறியப்பட்ட முக்கிய கருப்பொருட்கள் ({themes_analysis['total_themes']}):**")
+
+        for th in themes_analysis["detected_themes"]:
+            th_color = th["color"]
+            th_icon = th["icon"]
+            is_rejected = th.get("is_rejected_by_human", False)
+
+            with st.expander(
+                f"{th_icon} {th['theme_name_ta']} – ({th['evidence_count']} சான்று வாசகங்கள்)",
+                expanded=(not is_rejected),
+            ):
+                if is_rejected:
+                    st.warning("❌ இந்த இலக்கிய வகைப்பாடு ஆய்வாளரால் நிராகரிக்கப்பட்டது (Marked as Rejected by Epigraphist).")
+
+                st.markdown(
+                    f"""
+                    <div style="border-left: 4px solid {th_color}; padding-left: 12px; margin-bottom: 12px;">
+                        <span style="color: #F8ECD5; font-size: 0.95rem;"><b>விளக்கம்:</b> {th['description_ta']}</span><br>
+                        <span style="color: #C8AC82; font-size: 0.88rem;"><b>English:</b> {th['description_en']}</span><br>
+                        <small style="color: #FBBF24; margin-top: 6px; display: inline-block;">{th['ai_interpretation_note']}</small>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+                st.markdown("##### 📜 சான்றாதார வாசகங்கள் (Evidential Sentences):")
+                for p_idx, p in enumerate(th["detailed_passages"], start=1):
+                    kw_str = ", ".join(p["matched_keywords"])
+                    st.markdown(
+                        f"""
+                        <div style="background: #1F140D; border: 1px solid #3E2716; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px;">
+                            <span style="color: #D4AF37; font-weight: bold;">வாக்கியம் #{p['sentence_idx']}:</span>
+                            <span style="color: #F5E8D0;">"{p['sentence']}"</span><br>
+                            <small style="color: #81C784;">பொருந்திய கருப்பொருள் சொற்கள்: <code>{kw_str}</code> (பொருத்த நிலை: {p['relevance_score']})</small>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+
+                # Human review actions for this theme
+                st.markdown("---")
+                st.markdown("**✍️ ஆய்வாளர் ஏற்பு / நிராகரிப்பு (Human-in-the-Loop Validation):**")
+                th_col1, th_col2, th_col3 = st.columns([1, 1, 2])
+                with th_col1:
+                    if st.button("✅ ஏற்பு (Accept)", key=f"btn_accept_th_{sel_theme_doc}_{th['theme_id']}"):
+                        save_res = knowledge_verification.save_verification_decision(
+                            item_id=f"THEME_{sel_theme_doc}_{th['theme_id']}",
+                            item_type="THEME",
+                            original_ai_prediction=th,
+                            decision="ACCEPT",
+                            reviewer_role=st.session_state.get("active_user_role", "CHIEF_EPIGRAPHIST"),
+                            notes=f"Accepted by {st.session_state.get('active_user_role')}",
+                        )
+                        if save_res["success"]:
+                            st.success("கருப்பொருள் வகைப்பாடு உறுதிப்படுத்தப்பட்டது!")
+                            st.rerun()
+                        else:
+                            st.error(save_res["error"])
+                with th_col2:
+                    if st.button("❌ நிராகரி (Reject)", key=f"btn_reject_th_{sel_theme_doc}_{th['theme_id']}"):
+                        save_res = knowledge_verification.save_verification_decision(
+                            item_id=f"THEME_{sel_theme_doc}_{th['theme_id']}",
+                            item_type="THEME",
+                            original_ai_prediction=th,
+                            decision="REJECT",
+                            reviewer_role=st.session_state.get("active_user_role", "CHIEF_EPIGRAPHIST"),
+                            notes="Rejected as irrelevant",
+                        )
+                        if save_res["success"]:
+                            st.warning("கருப்பொருள் வகைப்பாடு நிராகரிக்கப்பட்டது!")
+                            st.rerun()
+                        else:
+                            st.error(save_res["error"])
+                with th_col3:
+                    cur_v = knowledge_verification.get_item_verification_status(f"THEME_{sel_theme_doc}_{th['theme_id']}")
+                    st.caption(f"தற்போதைய ஏற்பு நிலை: **{cur_v['status_label_ta']}**")
+    else:
+        st.info("இந்த ஆவணத்தில் குறிப்பிட்ட கருப்பொருள் சான்றுகள் காணப்படவில்லை.")
+
+
+# =====================================================================
+# TAB 4: திறன்மிகு தமிழ்க் குரல் வாசிப்பு (Feature 3: Smart Tamil Voice Reading)
+# =====================================================================
+with tab_voice:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #1C190F 0%, #15130A 100%); border: 1.5px solid #6E5C23; border-left: 5px solid #FFD54F; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #FFD54F;">🔊 திறன்மிகு தமிழ்க் குரல் வாசிப்பு (Smart Tamil Voice Reading)</h3>
+            <p style="margin: 6px 0 0 0; color: #FFE082; font-size: 0.95rem;">
+                பழமையான ஓலைச்சுவடிகள் மற்றும் OCR உரைகளை <b>இயற்கையான தமிழ் குரலில் வாசித்துக் காட்டும்</b> அதிநவீன குரல் தொழில்நுட்பம் (Text-to-Speech).
+                நீண்ட ஆவணங்களை வாசிப்பு ஒழுங்கு மாறாமல் பகுதிகளாகப் பிரித்து, உரையை ஒளிரச் செய்து வாசிக்கிறது.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    voice_status = tamil_voice.check_voice_engine_status()
+    v_net_icon = "🟢" if voice_status["internet_connected"] else "🔴"
+    v_net_text = "இணையம் இணைக்கப்பட்டுள்ளது (Online)" if voice_status["internet_connected"] else "இணைய இணைப்பு இல்லை (Offline)"
+
+    st.markdown(
+        f"""
+        <div style="background: #241D12; border: 1px solid #5A4720; border-radius: 6px; padding: 10px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem;">
+            <div>🎙️ <b>குரல் இயந்திரம்:</b> <span style="color:#FFD54F;">{voice_status['engine_name']}</span></div>
+            <div>{v_net_icon} <b>நிலை:</b> <span style="color:#FFF;">{v_net_text}</span></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    v_doc_options = {
+        "live_ocr": f"📑 நடப்பு OCR ஆவணம் ({st.session_state.get('doc_name') or 'ஸ்கேன் உரை'})",
+        "thanjavur_inscription": "🏛️ தஞ்சைப் பெரிய கோயில் கல்வெட்டு (Brihadisvara Inscription)",
+        "tolkappiyam": "📜 தொல்காப்பியம் பாயிரச் சுவடி (Tolkappiyam Sangam Grammar)",
+        "silappadikaram": "🌊 சிலப்பதிகாரம் கானல்வரி ஏடு (Silappadikaram Epic)",
+        "tirukkural_commentary": "📖 திருக்குறள் பரிமேலழகர் உரை ஏடு (Tirukkural Palm-leaf)",
+    }
+    v_chosen_key = st.selectbox(
+        "📚 வாசிக்க வேண்டிய சுவடி ஆவணத்தைத் தேர்ந்தெடுக்கவும்:",
+        options=list(v_doc_options.keys()),
+        format_func=lambda k: v_doc_options[k],
+        key="voice_reading_doc_choice",
+    )
+
+    if v_chosen_key == "live_ocr":
+        v_active_text = live_ocr_text if live_ocr_text.strip() else (
+            "ஸ்வஸ்திஸ்ரீ திருநிலமளந்த முதலாம் இராஜராஜ சோழன் கி.பி. 1010 ஆம் ஆண்டு தஞ்சைப் பெரிய கோயிலைக் கட்டி முடித்தார். "
+            "இக்கோயிலின் மூலவர் பெருவுடையார் என்றும் விமானம் தட்சிண மேரு என்றும் கல்வெட்டுகளில் குறிப்பிடப்பட்டுள்ளது."
+        )
+    else:
+        v_active_text = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[v_chosen_key]["text"]
+
+    v_chunks = tamil_voice.chunk_tamil_text_for_voice(v_active_text, max_chunk_chars=320)
+
+    v_c1, v_c2 = st.columns([1, 1])
+    with v_c1:
+        v_speed_choice = st.radio(
+            "⚡ வாசிப்பு வேகம் (Playback Speed):",
+            options=["இயல்பான வேகம் (Normal 1.0x)", "மெதுவான வாசிப்பு / ஆய்வு முறை (Study Mode 0.8x)"],
+            horizontal=True,
+            key="v_speed_radio",
+        )
+        is_slow = v_speed_choice.startswith("மெதுவான")
+
+    with v_c2:
+        section_options = ["முழு உரை (Full Document)"] + [f"பகுதி {i}: {ch[:35]}..." for i, ch in enumerate(v_chunks, 1)]
+        v_sec_choice = st.selectbox(
+            "📖 வாசிக்க வேண்டிய பகுதி (Select Section / Chunk):",
+            options=range(len(section_options)),
+            format_func=lambda idx: section_options[idx],
+            key="v_section_choice",
+        )
+
+    if v_sec_choice == 0:
+        text_to_speak = v_active_text
+        section_label = "முழு உரை (Full Document)"
+    else:
+        text_to_speak = v_chunks[v_sec_choice - 1]
+        section_label = f"பகுதி {v_sec_choice}"
+
+    st.markdown(
+        f"""
+        <div style="background: #1E160E; border: 1.5px solid #8D6E63; border-radius: 8px; padding: 16px 20px; margin: 12px 0;">
+            <div style="display:flex; justify-content:space-between; color:#D4AF37; font-size:0.88rem; margin-bottom:8px;">
+                <span><b>வாசிக்கப்படும் பகுதி:</b> {section_label}</span>
+                <span><b>எழுத்துக்கள்:</b> {len(text_to_speak)} | <b>சொற்கள்:</b> {len(text_to_speak.split())}</span>
+            </div>
+            <div style="color: #FFF8E7; font-size: 1.15rem; line-height: 1.8; font-family: 'Mukta Malar', serif; letter-spacing: 0.3px;">
+                {text_to_speak}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    p_col1, p_col2, p_col3 = st.columns([1.5, 1.5, 3])
+    with p_col1:
+        play_btn = st.button("▶️ குரல் வாசிப்பைத் தொடங்கு (Play Voice)", type="primary", use_container_width=True, key="btn_voice_play")
+    with p_col2:
+        stop_btn = st.button("⏹️ குரல் வாசிப்பை நிறுத்து (Stop Voice)", use_container_width=True, key="btn_voice_stop")
+
+    if stop_btn:
+        st.session_state.voice_audio_bytes = None
+        st.info("குரல் வாசிப்பு நிறுத்தப்பட்டது (Playback stopped).")
+
+    if play_btn:
+        with st.spinner("உண்மையான தமிழ் குரல் ஆடியோவை உருவாக்குகிறது..."):
+            v_res = tamil_voice.synthesize_tamil_speech(text_to_speak, slow=is_slow)
+            if v_res["success"]:
+                st.session_state.voice_audio_bytes = v_res["audio_bytes"]
+                st.session_state.voice_info = v_res
+                st.success(f"தமிழ்க் குரல் தயார் ({v_res['word_count']} சொற்கள், ~{v_res['duration_est_seconds']} விநாடிகள்)!")
+            else:
+                st.error(v_res["error"])
+
+    if st.session_state.get("voice_audio_bytes") is not None:
+        st.audio(st.session_state.voice_audio_bytes, format="audio/mp3", autoplay=False, key="voice_reading_tab_audio_player")
+        st.download_button(
+            "📥 MP3 ஆடியோ கோப்பைப் பதிவிறக்கு (Download MP3)",
+            data=st.session_state.voice_audio_bytes,
+            file_name="tamil_manuscript_voice.mp3",
+            mime="audio/mp3",
+            key="btn_dl_voice_mp3",
+        )
+
+
+
+
+# =====================================================================
+# TAB: சுவடி பொருள்சார் தேடல் (Feature 4: Semantic Search Across Tamil Manuscripts)
+# =====================================================================
+with tab_semantic:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #101E2E 0%, #0A1420 100%); border: 1.5px solid #1E4976; border-left: 5px solid #38BDF8; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #38BDF8;">🔎 சுவடி பொருள்சார் தேடல் (Semantic Search Across Tamil Manuscripts)</h3>
+            <p style="margin: 6px 0 0 0; color: #BAE6FD; font-size: 0.95rem;">
+                வெறும் எழுத்துப் பொருத்தங்களை மட்டும் பாராமல், <b>கருத்து மற்றும் பொருள் சார்ந்த (Meaning-Based)</b> அதிநவீனத் தேடல்.
+                தமிழ் மற்றும் ஆங்கில வினவல்களை ஆதரிக்கிறது; ஆவணத் தலைப்புகள் மற்றும் வாக்கியச் சான்றுகளுடன் முடிவுகளை வரிசைப்படுத்துகிறது.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("##### 💡 மாதிரிப் பொருள்சார் தேடல்கள் (Sample Semantic Queries):")
+    sample_sem_queries = [
+        "🏛️ கோயில் கட்டடக் கலை & விமானம் (Temple Architecture)",
+        "👑 சோழப் பேரரசு & மன்னர் ஆட்சி (Chola Dynasty & Kings)",
+        "📜 தொல்காப்பிய இலக்கண நெறிகள் (Grammatical Treatises)",
+        "🌊 காவிரிப்பூம்பட்டினக் கடற்கரை & காப்பியம் (Epic Shore)",
+        "📖 அறத்துப்பால் உலகப் பொதுமறை (Universal Ethics)",
+    ]
+    sem_cols = st.columns(len(sample_sem_queries))
+    for idx, (sc, sq) in enumerate(zip(sem_cols, sample_sem_queries)):
+        with sc:
+            clean_sq = sq.split("(")[0].replace("🏛️", "").replace("👑", "").replace("📜", "").replace("🌊", "").replace("📖", "").strip()
+            if st.button(clean_sq, key=f"btn_sem_chip_{idx}", use_container_width=True):
+                st.session_state["sem_query_input"] = clean_sq
+
+    sem_q_col1, sem_q_col2 = st.columns([3, 1])
+    with sem_q_col1:
+        sem_query = st.text_input(
+            "🔍 பொருள்சார் தேடல் சொல்லை உள்ளிடவும் (Tamil or English Semantic Query):",
+            value=st.session_state.get("sem_query_input", ""),
+            placeholder="எ.கா: கோயில் கட்டடக் கலை அல்லது king chola empire",
+            key="sem_search_input_box",
+        )
+    with sem_q_col2:
+        sem_min_conf = st.slider("குறைந்தபட்சப் பொருத்தம் (Min Confidence):", min_value=0.15, max_value=0.70, value=0.25, step=0.05, key="sem_conf_slider")
+
+    if st.button("🚀 பொருள்சார் தேடலை இயக்கு (Run Semantic Search)", type="primary", key="btn_exec_sem_search"):
+        if sem_query.strip():
+            with st.spinner("சுவடி ஆவணங்களில் பொருள்சார் கருத்துக்களைத் தேடுகிறது..."):
+                sem_res = semantic_search.semantic_search_manuscripts(sem_query.strip(), min_confidence=sem_min_conf)
+                st.session_state["latest_sem_results"] = sem_res
+
+    latest_sem = st.session_state.get("latest_sem_results")
+    if latest_sem and latest_sem["success"]:
+        st.markdown(f"#### 🎯 கண்டறியப்பட்ட பொருள்சார் சான்றுகள் ({latest_sem['total_matches']} பொருத்தங்கள்):")
+        if latest_sem["matched_concepts"]:
+            st.caption(f"செயலில் உள்ள கருத்துக் குழுக்கள் (Active Concepts): `{'`, `'.join(latest_sem['matched_concepts'])}`")
+
+        if latest_sem["total_matches"] == 0:
+            st.info("மன்னிக்கவும், இந்த வினவலுக்குரிய பொருள்சார் சான்றுகள் எதுவும் ஆவணங்களில் காணப்படவில்லை (No semantic matches found).")
+        else:
+            for hit in latest_sem["results"]:
+                conf_color = "#4CAF50" if hit["score"] >= 0.55 else "#FFB300"
+                st.markdown(
+                    f"""
+                    <div style="background: #131E2C; border: 1.5px solid #234365; border-left: 5px solid {conf_color}; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                            <span style="font-weight:bold; color:#7DD3FC; font-size:1.05rem;">{hit['doc_title']}</span>
+                            <span style="background:rgba(56,189,248,0.15); color:#38BDF8; border:1px solid #0284C7; padding:2px 8px; border-radius:4px; font-size:0.8rem; font-weight:bold;">
+                                பொருத்தம்: {hit['confidence_percentage']}
+                            </span>
+                        </div>
+                        <div style="color: #94A3B8; font-size: 0.85rem; margin: 4px 0 8px 0;">
+                            <b>காலம்:</b> {hit.get('era', '-')} | <b>வாக்கிய எண்:</b> #{hit['sentence_number']}
+                        </div>
+                        <div style="color: #F8FAFC; font-size: 1.05rem; line-height: 1.6; font-family:'Mukta Malar', serif;">
+                            "{hit['passage']}"
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+
+# =====================================================================
+# TAB: சுவடிப் பதிப்பு ஒப்பாய்வு (Feature 5: Manuscript Variant Comparison AI)
+# =====================================================================
+with tab_variant:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #24160E 0%, #1A0F0A 100%); border: 1.5px solid #734F27; border-left: 5px solid #FB923C; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #FB923C;">⚖️ சுவடிப் பதிப்பு ஒப்பாய்வு (Manuscript Variant Comparison AI)</h3>
+            <p style="margin: 6px 0 0 0; color: #FED7AA; font-size: 0.95rem;">
+                இரண்டு வெவ்வேறு ஓலைச்சுவடிப் பிரதிகள், செப்பேடுகள் அல்லது அச்சுப் பதிப்புகளை <b>பக்கம் பக்கமாக ஒப்பிட்டு (Side-by-Side Collation)</b>, 
+                எழுத்துப் பிழை, சந்தி வேறுபாடு மற்றும் சொற்பொருள் பேதங்களை நுண்ணறிவோடு பிரித்தறியும் கருவி.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    var_mode = st.radio(
+        "ஒப்பாய்வு முறைமை (Comparison Mode):",
+        options=["🏛️ மாதிரிச் சுவடிப் பிரதிகள் (Standard Inscription vs Palm-leaf Copy)", "✏️ சொந்த உரைகளை ஒப்பிடு (Custom Text Comparison)"],
+        horizontal=True,
+        key="var_mode_radio",
+    )
+
+    if var_mode.startswith("🏛️"):
+        v_text_a = (
+            "ஸ்வஸ்திஸ்ரீ திருநிலமளந்த முதலாம் இராஜராஜ சோழன் கி.பி. 1010 ஆம் ஆண்டு தஞ்சைப் பெரிய கோயிலைக் கட்டினார். "
+            "இக்கோயிலின் மூலவர் பெருவுடையார் என்றும் விமானம் தட்சிண மேரு என்றும் கல்வெட்டுகளில் குறிப்பிடப்பட்டுள்ளது. "
+            "கோயிலின் தலைமைத் தச்சராக வீரசோழன் குஞ்சர மல்லன் நியமிக்கப்பட்டார். "
+            "இக்கோயிலுக்கு அளித்த பொன் வெள்ளி செப்புப் பாத்திரங்கள் மற்றும் நெல் கொடைகள் அனைத்தும் கல்வெட்டில் பொறிக்கப்பட்டுள்ளன."
+        )
+        # Variant B has typical palm-leaf scribal variations
+        v_text_b = (
+            "ஸ்வஸ்திஸ்ரீ திருநிலமளந்த முதலாம் இராஜராஜ சோழன் கி.பி. 1010 ஆம் ஆண்டு தஞ்சைப் பெரிய கோயிலைக் கட்டி முடித்தார். "
+            "இக்கோயிலின் மூலவர் பெருவுடையார் என்றும் விமானம் தட்சிண மேரு என்றும் சுவடிகளில் எழுதப்பட்டுள்ளது. "
+            "கோயிலின் தலைமைத் தச்சராக குஞ்சரமல்லன் இராஜராஜப் பெருந்தச்சன் நியமிக்கப்பட்டார். "
+            "சோழர்களின் ஆட்சிக் காலத்தில் தமிழகத்தில் கலைகளும் சிற்பமும் பெரும் வளர்ச்சி அடைந்தன. "
+            "இக்கோயிலுக்கு அளித்த பொன் வெள்ளி மற்றும் நெல் கொடைகள் பொறிக்கப்பட்டுள்ளன."
+        )
+        lbl_a = "கல்வெட்டுப் பதிவு (Epigraphical Inscription)"
+        lbl_b = "பிற்காலச் சுவடிப் பிரதி (Palm-leaf Copy)"
+    else:
+        v_col_in1, v_col_in2 = st.columns(2)
+        with v_col_in1:
+            lbl_a = st.text_input("பிரதி A பெயர்:", value="பிரதி A (Manuscript A)", key="var_lbl_a")
+            v_text_a = st.text_area("பிரதி A உரை:", value=live_ocr_text if live_ocr_text else "தமிழ் மொழியின் மிகத் தொன்மையான நூல் தொல்காப்பியம்.", height=150, key="var_custom_a")
+        with v_col_in2:
+            lbl_b = st.text_input("பிரதி B பெயர்:", value="பிரதி B (Manuscript B)", key="var_lbl_b")
+            v_text_b = st.text_area("பிரதி B உரை:", value="தமிழ் மொழியின் தொன்மையான இலக்கண நூல் தொல்காப்பியம் ஆகும்.", height=150, key="var_custom_b")
+
+    if st.button("🚀 சுவடிப் பிரதிகளை ஒப்பிடு (Run Variant Comparison)", type="primary", key="btn_run_variant_ai"):
+        with st.spinner("இரு பிரதிகளையும் வரிசையாக ஒப்புமை செய்கிறது..."):
+            v_result = manuscript_variant_ai.compare_manuscript_variants(v_text_a, v_text_b, label_a=lbl_a, label_b=lbl_b)
+            st.session_state["latest_variant_result"] = v_result
+
+    # Display results if available
+    if "latest_variant_result" not in st.session_state:
+        # Run default
+        st.session_state["latest_variant_result"] = manuscript_variant_ai.compare_manuscript_variants(v_text_a, v_text_b, label_a=lbl_a, label_b=lbl_b)
+
+    v_data = st.session_state["latest_variant_result"]
+    if v_data and v_data["success"]:
+        # Summary metrics
+        vm1, vm2, vm3, vm4, vm5 = st.columns(5)
+        vm1.metric("மொத்த வரிகள்", v_data["total_aligned_rows"])
+        vm2.metric("முழுமையாக ஒத்தது", v_data["identical_count"])
+        vm3.metric("எழுத்து/சந்தி பேதம்", v_data["orthographic_count"])
+        vm4.metric("சொற்பொருள் பேதம்", v_data["substantial_count"])
+        vm5.metric("ஒப்புமை விழுக்காடு", f"{v_data['agreement_percentage']}%")
+
+        st.markdown("#### 📜 வரி வாரியான ஒப்பாய்வு அட்டவணை (Side-by-Side Collation):")
+        for row in v_data["aligned_rows"]:
+            border_c = row["color"]
+            warn_badge = " ⚠️ [மீள்பார்வை தேவை]" if row["is_uncertain"] else ""
+            st.markdown(
+                f"""
+                <div style="background: #1A120B; border: 1.5px solid #4D3117; border-left: 5px solid {border_c}; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
+                    <div style="display:flex; justify-content:space-between; color:#D4AF37; font-size:0.85rem; margin-bottom:6px;">
+                        <span><b>நிலை:</b> <span style="color:{border_c}; font-weight:bold;">{row['status_label_ta']}{warn_badge}</span></span>
+                        <span><b>ஒப்புமை:</b> {int(row['similarity']*100)}%</span>
+                    </div>
+                    <div style="display:flex; gap:20px; font-size:0.98rem; font-family:'Mukta Malar', serif; line-height:1.6;">
+                        <div style="flex:1; background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:4px; border:1px solid #3E2723;">
+                            <small style="color:#BCAAA4; display:block; font-family:sans-serif;">{v_data['label_a']} (வரி {row['line_no_a']}):</small>
+                            <span style="color:#FFF;">{row['text_a']}</span>
+                        </div>
+                        <div style="flex:1; background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:4px; border:1px solid #3E2723;">
+                            <small style="color:#BCAAA4; display:block; font-family:sans-serif;">{v_data['label_b']} (வரி {row['line_no_b']}):</small>
+                            <span style="color:#FFE082;">{row['text_b']}</span>
+                        </div>
+                    </div>
+                    <div style="color:#C8AC82; font-size:0.82rem; margin-top:6px; font-style:italic;">
+                        💡 {row['note']}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+
+# =====================================================================
+# TAB: வரலாற்றுக் காலவரிசை (Feature 6: Historical Context & Timeline Explorer)
+# =====================================================================
+with tab_timeline:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #1C150A 0%, #140E06 100%); border: 1.5px solid #6E4F18; border-left: 5px solid #FACC15; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #FACC15;">⏳ வரலாற்றுக் காலவரிசை & சூழல் ஆய்வு (Historical Context & Timeline Explorer)</h3>
+            <p style="margin: 6px 0 0 0; color: #FEF08A; font-size: 0.95rem;">
+                ஓலைச்சுவடிகள் மற்றும் கல்வெட்டுகளில் குறிப்பிடப்பட்டுள்ள <b>ஆண்டுகள், மன்னர்கள் மற்றும் வரலாற்று நிகழ்வுகளைக்</b> 
+                காலவரிசைப்படி தொகுத்து, ஆவணச் சான்றுகளோடு இணைத்துக் காட்சிப்படுத்துகிறது.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    tl_doc_options = {
+        "thanjavur_inscription": "🏛️ தஞ்சைப் பெரிய கோயில் கல்வெட்டு (Brihadisvara Inscription - 1010 CE)",
+        "tolkappiyam": "📜 தொல்காப்பியம் பாயிரச் சுவடி (Tolkappiyam Sangam Grammar)",
+        "silappadikaram": "🌊 சிலப்பதிகாரம் கானல்வரி ஏடு (Silappadikaram Epic)",
+        "tirukkural_commentary": "📖 திருக்குறள் பரிமேலழகர் உரை ஏடு (Tirukkural Palm-leaf)",
+        "all_manuscripts": "🏛️ அனைத்துச் சுவடிகளையும் ஒருங்கிணைத்த முழுமையான காலவரிசை (Master Timeline)",
+    }
+    if live_ocr_text.strip():
+        tl_doc_options["live_ocr"] = f"📑 நடப்பு OCR ஆவணம் ({st.session_state.get('doc_name') or 'ஸ்கேன் உரை'})"
+
+    selected_tl_doc = st.selectbox(
+        "📚 காலவரிசை உருவாக்க வேண்டிய ஆவணத்தைத் தேர்ந்தெடுக்கவும்:",
+        options=list(tl_doc_options.keys()),
+        format_func=lambda k: tl_doc_options[k],
+        key="timeline_doc_choice",
+    )
+
+    if selected_tl_doc == "all_manuscripts":
+        combined_events = []
+        for doc_k, doc_val in manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS.items():
+            combined_events.extend(timeline_explorer.extract_timeline_events(doc_val["text"], doc_val["title"]))
+        # Sort master timeline
+        combined_events.sort(key=lambda x: x["year_numeric"])
+        tl_events_to_show = combined_events
+        tl_doc_name = "அனைத்துச் சுவடிகள்"
+    elif selected_tl_doc == "live_ocr":
+        tl_doc_name = st.session_state.get("doc_name") or "நடப்பு OCR ஆவணம்"
+        tl_events_to_show = timeline_explorer.extract_timeline_events(live_ocr_text, tl_doc_name)
+    else:
+        doc_entry = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[selected_tl_doc]
+        tl_doc_name = doc_entry["title"]
+        tl_events_to_show = timeline_explorer.extract_timeline_events(doc_entry["text"], tl_doc_name)
+
+    # Timeline metrics
+    tm1, tm2, tm3 = st.columns(3)
+    tm1.metric("மொத்த வரலாற்று நிகழ்வுகள்", len(tl_events_to_show))
+    stated_count = sum(1 for e in tl_events_to_show if e.get("is_source_stated"))
+    tm2.metric("சான்றாதாரக் காலம் (Source-Stated)", stated_count)
+    tm3.metric("வரலாற்று ஊகக் காலம் (Inferred)", len(tl_events_to_show) - stated_count)
+
+    st.markdown("#### 📜 வரலாற்று காலவரிசைப் பலகை (Chronological Event Feed):")
+    timeline_html_output = timeline_explorer.generate_timeline_html(tl_events_to_show)
+    st.components.v1.html(timeline_html_output, height=480, scrolling=True)
+
+
+
+
+
+# =====================================================================
+# TAB: OCR பிழை திருத்த மீள்பார்வை (Feature 8: OCR Correction Review Workflow)
+# =====================================================================
+with tab_review:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #1C1A0E 0%, #121008 100%); border: 1.5px solid #6E5C23; border-left: 5px solid #F59E0B; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #F59E0B;">✍️ OCR பிழை திருத்த மீள்பார்வை (Human-in-the-Loop OCR Review Workflow)</h3>
+            <p style="margin: 6px 0 0 0; color: #FDE68A; font-size: 0.95rem;">
+                OCR மூலம் பிரித்தெடுக்கப்பட்ட சுவடி உரையில் உள்ள எழுத்துப் பிழைகள் மற்றும் முரண்பாடுகளைத் துல்லியமாக அடையாளம் கண்டு,
+                <b>மனித மேற்பார்வையில் (Human-in-the-Loop)</b> ஒவ்வொன்றாக ஏற்று அல்லது நிராகரித்து, மூல உரையைப் பாதுகாத்து புதிய செப்பனிட்ட பதிப்பை உருவாக்கும் பணிமுறை.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    rev_sample_options = {
+        "live_ocr": f"📑 நடப்பு OCR உரை ({st.session_state.get('doc_name') or 'ஸ்கேன் உரை'})",
+        "sample_inscription_anomaly": "🏛️ கல்வெட்டு OCR மாதிரி (சோழன், தொல்காப்பியம், ஞாலம் போன்ற எழுத்துப் பிழைகள்)",
+        "tolkappiyam_sample": "📜 தொல்காப்பியம் பாயிரச் சுவடிப் பிரதி",
+    }
+    rev_choice = st.selectbox(
+        "ஆய்வு செய்ய வேண்டிய OCR உரையைத் தேர்ந்தெடுக்கவும்:",
+        options=list(rev_sample_options.keys()),
+        format_func=lambda k: rev_sample_options[k],
+        key="ocr_rev_source_select",
+    )
+
+    if rev_choice == "sample_inscription_anomaly":
+        raw_review_text = (
+            "ஸ்வஸ்திஸ்ரீ திருநிலமளந்த முதலாம் இராஜராஜ சோழன் கி.பி. 1010 ஆம் ஆண்டு தஞ்சைப் பெரிய கோயிலைக் கட்டி முடித்தார். "
+            "தொல்காப்பியம் தமிழ் மொழியின் மிகத் தொன்மையான இலக்கண நூலாகும். "
+            "மன்னுயிர் காக்க வேந்தன் ஞாலம் போற்ற ஆட்சி புரிந்தான்."
+        )
+    elif rev_choice == "tolkappiyam_sample":
+        raw_review_text = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS["tolkappiyam"]["text"]
+    else:
+        raw_review_text = live_ocr_text if live_ocr_text.strip() else (
+            "ஸ்வஸ்திஸ்ரீ திருநிலமளந்த முதலாம் இராஜராஜ சோழன் கி.பி. 1010 ஆம் ஆண்டு தஞ்சைப் பெரிய கோயிலைக் கட்டினார்."
+        )
+
+    st.session_state.ocr_review_active_text = raw_review_text
+
+    col_btn_rev1, col_btn_rev2 = st.columns([1.5, 4])
+    with col_btn_rev1:
+        detect_btn = st.button("🔍 பிழைகள் & முரண்பாடுகளைக் கண்டறி (Detect Anomalies)", type="primary", key="btn_detect_ocr_anomalies")
+    with col_btn_rev2:
+        if st.button("🔄 திருத்தங்களை மீட்டமை (Reset Edits)", key="btn_reset_ocr_edits"):
+            st.session_state.accepted_ocr_corrections = []
+            st.session_state.rejected_ocr_corrections = []
+            st.rerun()
+
+    # Detect anomalies
+    detected_anomalies = ocr_review_workflow.detect_ocr_anomalies(st.session_state.ocr_review_active_text)
+
+    # Metrics row
+    r_m1, r_m2, r_m3, r_m4 = st.columns(4)
+    r_m1.metric("கண்டறியப்பட்ட முரண்பாடுகள்", len(detected_anomalies))
+    prot_count = sum(1 for a in detected_anomalies if a.get("is_protected"))
+    r_m2.metric("🛡️ பாதுகாக்கப்பட்ட பழந்தமிழ்ச் சொற்கள்", prot_count)
+    r_m3.metric("✅ ஏற்கப்பட்ட திருத்தங்கள்", len(st.session_state.accepted_ocr_corrections))
+    r_m4.metric("❌ நிராகரிக்கப்பட்டவை", len(st.session_state.rejected_ocr_corrections))
+
+    st.markdown("#### 📋 கண்டறியப்பட்ட முரண்பாடுகள் & பரிந்துரைகள் (Candidate Correction Feed):")
+    if not detected_anomalies:
+        st.success("இந்த உரையில் வெளிப்படையான OCR முரண்பாடுகள் எதுவும் கண்டறியப்படவில்லை (No OCR anomalies detected).")
+    else:
+        for a_idx, anom in enumerate(detected_anomalies):
+            orig_w = anom["original_word"]
+            sugg_w = anom["suggested_word"]
+            is_prot = anom.get("is_protected", False)
+            conf_label = anom.get("heuristic_confidence", "மதிப்பிடப்படாதது")
+            border_c = anom["color"]
+
+            is_already_accepted = any(x["original_word"] == orig_w for x in st.session_state.accepted_ocr_corrections)
+            is_already_rejected = orig_w in st.session_state.rejected_ocr_corrections
+
+            action_status = ""
+            if is_already_accepted:
+                action_status = " <b style='color:#81C784;'>[ஏற்கப்பட்டது / ACCEPTED]</b>"
+            elif is_already_rejected:
+                action_status = " <b style='color:#EF5350;'>[நிராகரிக்கப்பட்டது / REJECTED]</b>"
+
+            st.markdown(
+                f"""
+                <div style="background: #18130B; border: 1.5px solid #4D3117; border-left: 5px solid {border_c}; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                        <span style="color: {border_c}; font-weight: bold; font-size: 0.95rem;">{anom['label_ta']}{action_status}</span>
+                        <span style="color: #94A3B8; font-size: 0.78rem;">நம்பகத்தன்மை: <b>{conf_label}</b></span>
+                    </div>
+                    <div style="margin: 6px 0; font-size: 1.05rem;">
+                        <span style="color: #E2E8F0; text-decoration: line-through;">{orig_w}</span> ➔ 
+                        <span style="color: #86EFAC; font-weight: bold;">{sugg_w}</span>
+                    </div>
+                    <div style="color: #C8AC82; font-size: 0.85rem;">💡 {anom['explanation']}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            # Accept / Reject action buttons if not protected
+            if not is_prot:
+                c_act1, c_act2, c_spacer = st.columns([1, 1, 4])
+                with c_act1:
+                    if st.button(f"✅ ஏற்க", key=f"btn_acc_{a_idx}_{orig_w}"):
+                        if not is_already_accepted:
+                            st.session_state.accepted_ocr_corrections.append({"original_word": orig_w, "suggested_word": sugg_w})
+                            if orig_w in st.session_state.rejected_ocr_corrections:
+                                st.session_state.rejected_ocr_corrections.remove(orig_w)
+                            st.rerun()
+                with c_act2:
+                    if st.button(f"❌ நிராகரி", key=f"btn_rej_{a_idx}_{orig_w}"):
+                        if orig_w not in st.session_state.rejected_ocr_corrections:
+                            st.session_state.rejected_ocr_corrections.append(orig_w)
+                            st.session_state.accepted_ocr_corrections = [x for x in st.session_state.accepted_ocr_corrections if x["original_word"] != orig_w]
+                            st.rerun()
+
+    # Generate revised text based on accepted corrections
+    revised_edition_text = ocr_review_workflow.apply_accepted_corrections(
+        st.session_state.ocr_review_active_text,
+        st.session_state.accepted_ocr_corrections,
+    )
+
+    st.markdown("---")
+    st.markdown("#### 📜 இரு பிரதி ஒப்பீடு: மூல OCR உரை vs செப்பனிட்ட பதிப்பு:")
+    c_rev1, c_rev2 = st.columns(2)
+    with c_rev1:
+        st.caption("📄 மூல OCR உரை (Original Raw Transcription - 100% பாதுகாக்கப்பட்டது):")
+        st.text_area("மூல உரை:", value=st.session_state.ocr_review_active_text, height=180, disabled=True, key="rev_orig_box")
+    with c_rev2:
+        st.caption(f"✨ செப்பனிட்ட புதிய பிரதி ({len(st.session_state.accepted_ocr_corrections)} திருத்தங்கள் இணைக்கப்பட்டன):")
+        st.text_area("செப்பனிட்ட உரை:", value=revised_edition_text, height=180, disabled=True, key="rev_curated_box")
+
+    st.download_button(
+        "📥 செப்பனிட்ட உரையைப் பதிவிறக்கு (Download Curated Edition)",
+        data=revised_edition_text,
+        file_name="curated_tamil_manuscript.txt",
+        mime="text/plain",
+        key="btn_dl_curated_txt",
+    )
+
+
+# =====================================================================
+# TAB: AI ஆய்வு & தர மதிப்பீடு (Features 7, 9, 10: AI Evaluation & Experiments)
+# =====================================================================
+with tab_eval:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #161024 0%, #0D0A17 100%); border: 1.5px solid #4A3378; border-left: 5px solid #A855F7; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #A855F7;">🔬 AI ஆய்வு & தர மதிப்பீட்டுப் பலகை (AI Evaluation Dashboard & Experiment Tracking)</h3>
+            <p style="margin: 6px 0 0 0; color: #E9D5FF; font-size: 0.95rem;">
+                உண்மையான தரை உண்மைத் தரவுகளின் (Ground-Truth Datasets) அடிப்படையில் OCR, பொருள்சார் தேடல் மற்றும் வினா-விடை மாதிரிகளின்
+                துல்லியத்தை அளவிடும் <b>ஆராய்ச்சித் தரக் கட்டுப்பாட்டுப் பலகை</b> (CER, WER, Precision@k, Recall@k, Anti-Hallucination Rate).
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    eval_col1, eval_col2 = st.columns([2, 3])
+    with eval_col1:
+        if st.button("🚀 முழுமையான தர மதிப்பீட்டை இயக்கு (Run Benchmark Suite)", type="primary", key="btn_run_eval_suite"):
+            with st.spinner("உண்மையான தரவுகளோடு மாதிரிகளை ஒப்பிட்டு துல்லியத்தை கணக்கிடுகிறது..."):
+                eval_res = ai_evaluation.run_full_evaluation_suite(experiment_name=f"Manual Run at {datetime.now().strftime('%H:%M:%S')}")
+                st.session_state.latest_evaluation_data = eval_res
+
+    # Auto-load if empty
+    if st.session_state.latest_evaluation_data is None:
+        st.session_state.latest_evaluation_data = ai_evaluation.run_full_evaluation_suite(experiment_name="Default Baseline Benchmark")
+
+    cur_eval = st.session_state.latest_evaluation_data
+    if cur_eval and cur_eval["success"]:
+        ocr_ev = cur_eval["ocr_evaluation"]
+        ret_ev = cur_eval["retrieval_evaluation"]
+        qa_ev = cur_eval["qa_evaluation"]
+
+        # Real Benchmark Metrics Row
+        st.markdown("#### 📊 உண்மையான சோதனை அளவீடுகள் (Empirical Benchmark Metrics):")
+        em1, em2, em3, em4, em5, em6 = st.columns(6)
+        em1.metric("Character Error Rate (CER)", ocr_ev["mean_cer_pct"])
+        em2.metric("Word Error Rate (WER)", ocr_ev["mean_wer_pct"])
+        em3.metric("Retrieval Precision@1", ret_ev["precision_at_1_pct"])
+        em4.metric("Retrieval Precision@3", ret_ev["precision_at_3_pct"])
+        em5.metric("Anti-Hallucination Rate", qa_ev["anti_hallucination_refusal_rate"])
+        em6.metric("Citation Validity Rate", qa_ev["citation_validity_rate"])
+
+        # Detailed Evaluation Breakdown Tabs
+        t_o, t_r, t_q = st.tabs(["📝 OCR மாதிரி அளவீடுகள்", "🔎 தேடல் அளவீடுகள் (P@k)", "🤖 வினா-விடை தணிக்கை"])
+        with t_o:
+            st.write(f"**பரிசோதிக்கப்பட்ட தரை-உண்மை மாதிரிகள் ({ocr_ev['total_samples']}):**")
+            for samp in ocr_ev["samples"]:
+                st.markdown(
+                    f"""
+                    <div style="background:#171124; border:1px solid #3B2A58; padding:8px 14px; border-radius:6px; margin-bottom:8px;">
+                        <b>மாதிரி ID:</b> <code>{samp['sample_id']}</code> | 
+                        CER: <span style="color:#4CAF50; font-weight:bold;">{samp['cer_pct']}</span> | 
+                        WER: <span style="color:#FFB300; font-weight:bold;">{samp['wer_pct']}</span> | 
+                        எழுத்து துல்லியம்: <b>{samp['char_accuracy']}</b>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+        with t_r:
+            st.write(f"**தேடல் துல்லியப் பரிசோதனை ({ret_ev['total_test_queries']} வினவல்கள்):**")
+            for q_d in ret_ev["details"]:
+                p1_icon = "✅" if q_d["p_at_1"] > 0 else "❌"
+                st.markdown(
+                    f"""
+                    <div style="background:#171124; border:1px solid #3B2A58; padding:8px 14px; border-radius:6px; margin-bottom:8px;">
+                        {p1_icon} <b>வினவல்:</b> "{q_d['query']}" ➔ <b>எதிர்பார்க்கப்பட்ட ஆவணம்:</b> <code>{q_d['expected_doc']}</code> | 
+                        <b>கிடைத்த ஆவணம்:</b> <code>{q_d['retrieved_top_doc']}</code>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+        with t_q:
+            st.write(f"**வினா-விடை சான்றாதார நேர்மைப் பரிசோதனை ({qa_ev['total_test_questions']} வினாக்கள்):**")
+            for q_item in qa_ev["details"]:
+                q_icon = "✅" if q_item["status"] == "PASS" else "❌"
+                st.markdown(
+                    f"""
+                    <div style="background:#171124; border:1px solid #3B2A58; padding:8px 14px; border-radius:6px; margin-bottom:8px;">
+                        {q_icon} <b>கேள்வி:</b> "{q_item['question']}" | <b>வகை:</b> <code>{q_item['type']}</code> | 
+                        <b>முடிவு:</b> <b>{q_item['status']}</b> | சான்றுகள் எண்ணிக்கை: {q_item['citations_count']}
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+    # Feature 9: Source Traceability & Trust Layer Inspector
+    st.markdown("---")
+    st.markdown("#### 🛡️ மூல ஆவணச் சான்றாதாரத் தணிக்கை (Feature 9: Source Traceability & Trust Layer):")
+    st.caption("AI உருவாக்கிய எந்தவொரு கூற்றையும் உள்ளிட்டு, அது மூலச் சுவடியில் உள்ளதா என்பதை தணிக்கை செய்து சான்றாதார தரநிலையைப் பெறலாம்.")
+
+    tr_c1, tr_c2 = st.columns([3, 1])
+    with tr_c1:
+        test_claim = st.text_input(
+            "ஆய்வு செய்ய வேண்டிய கூற்றை உள்ளிடவும் (Enter claim to audit):",
+            value="முதலாம் இராஜராஜ சோழன் தஞ்சைப் பெரிய கோயிலைக் கட்டினார்",
+            key="trace_claim_input",
+        )
+    with tr_c2:
+        trace_doc_choice = st.selectbox(
+            "ஒப்பிட வேண்டிய ஆவணம்:",
+            options=["thanjavur_inscription", "tolkappiyam", "silappadikaram", "tirukkural_commentary"],
+            format_func=lambda k: manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[k]["title"],
+            key="trace_doc_select",
+        )
+
+    t_doc_entry = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[trace_doc_choice]
+    audit_res = source_trust_layer.audit_claim_traceability(
+        test_claim,
+        t_doc_entry["text"],
+        trace_doc_choice,
+        t_doc_entry["title"],
+    )
+    st.markdown(source_trust_layer.render_traceability_badge(audit_res), unsafe_allow_html=True)
+
+    # Feature 10: Persistent Experiment Logs
+    st.markdown("---")
+    st.markdown("#### 📁 ஆராய்ச்சிப் பரிசோதனைப் பதிவேடு (Feature 10: Research Experiment Logs):")
+    all_experiments = ai_evaluation.get_all_experiment_logs()
+    st.caption(f"மொத்தம் {len(all_experiments)} பரிசோதனைகள் பதிவு செய்யப்பட்டுள்ளன:")
+
+    if all_experiments:
+        for exp in all_experiments[:5]:
+            st.markdown(
+                f"""
+                <div style="background: #1B132B; border: 1px solid #4D3478; border-radius: 6px; padding: 10px 14px; margin-bottom: 8px;">
+                    <div style="display:flex; justify-content:space-between; color:#C084FC;">
+                        <b>{exp['experiment_id']} - {exp['experiment_name']}</b>
+                        <small>{exp['timestamp']}</small>
+                    </div>
+                    <div style="color: #DDD; font-size: 0.88rem; margin: 4px 0;">
+                        <b>மாதிரி:</b> {exp['model_name']} | <b>தரவுத்தளம்:</b> {exp['dataset_name']}
+                    </div>
+                    <div style="color: #A5B4FC; font-size: 0.82rem;">
+                        CER: {exp['metrics'].get('mean_cer_pct', '-')} | WER: {exp['metrics'].get('mean_wer_pct', '-')} | 
+                        P@1: {exp['metrics'].get('retrieval_p_at_1', '-')} | QA Refusal: {exp['metrics'].get('anti_hallucination_refusal_rate', '-')}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        st.download_button(
+            "📥 பரிசோதனைப் பதிவுகளைப் பதிவிறக்கு (Download Experiments JSON)",
+            data=json.dumps(all_experiments, ensure_ascii=False, indent=2),
+            file_name="tamil_heritage_experiments_log.json",
+            mime="application/json",
+            key="btn_dl_exp_json",
+        )
+
+
+# =====================================================================
+# TAB: தொகுப்பு நுண்ணறிவு & காப்பகம் (Features 13 & 15: Collection Insights & Export)
+# =====================================================================
+with tab_collection:
+    st.markdown("### 📊 சுவடித் தொகுப்பு நுண்ணறிவு & எண்மக் காப்பகம் (Collection Insights & Digital Preservation)")
+    st.caption("நூலகத்தின் முழுமையான தரவுப் புள்ளிவிவரங்கள், சொல்லகச் செழுமை (TTR), உருப்படி இணைப்பு வலைப்பின்னல் மற்றும் TEI-P5 சர்வதேச ஏற்றுமதி வசதிகள்.")
+
+    # Calculate live report grounded in stored documents
+    report = collection_intelligence.get_collection_intelligence_report(
+        session_history=st.session_state.get("ocr_history", [])
+    )
+
+    # 4 Key Metrics Cards
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.metric("சுட்டெண் பெற்ற ஆவணங்கள்", f"{report['indexed_documents_count']} / {report['total_documents']}", f"+{report['unindexed_documents_count']} புதியவை")
+    with c2:
+        st.metric("பகுப்பாய்ந்த வாசகங்கள்", report["total_passages"])
+    with c3:
+        st.metric("சொல்லகச் செழுமை (TTR)", report["type_token_ratio_pct"], f"{report['unique_vocabulary_types']} தனித்துவச் சொற்கள்")
+    with c4:
+        st.metric("எழுத்துரு வகைப்பாடு", report["script_characteristics"]["script_type"][:18] + "..", f"கிரந்தம்: {report['script_characteristics']['grantha_ratio_pct']}")
+
+    # Grounded Summary Banner
+    st.markdown(
+        f"""
+        <div style="background: #1C130B; border: 1.5px solid #5C381B; border-radius: 8px; padding: 14px 20px; margin: 16px 0;">
+            <b style="color: #E6CA65; font-size: 1.02rem;">📜 தொகுப்பு நிலை அறிக்கை (Repository Attestation Summary):</b><br>
+            <span style="color: #F5E8D0; font-size: 0.93rem; line-height: 1.7;">
+                {report['collection_grounded_summary']}
+            </span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Missing metadata and processing failure alerts (Feature 13 requirement)
+    if report["missing_metadata_alerts"] or report["processing_failures"]:
+        st.markdown("##### ⚠️ கவனிக்க வேண்டிய முரண்பாடுகள் & நிலுவைகள் (Metadata Alerts & Processing Failures):")
+        for fail in report["processing_failures"]:
+            st.error(f"❌ ஆவணம்: **{fail['title']}** — காரணம்: {fail['reason']}")
+        for alert in report["missing_metadata_alerts"]:
+            st.warning(f"⚠️ ஆவணம்: **{alert['title']}** — விடுபட்ட விவரங்கள்: {', '.join(alert['missing_fields'])}")
+
+    # Document-Entity Links Explorer
+    with st.expander("🕸️ ஆவணம் - உருப்படி இணைப்பு வலைப்பின்னல் (Document-Entity Bipartite Links)", expanded=False):
+        st.caption("ஆவணங்களுக்கும் அவற்றில் கண்டறியப்பட்ட வரலாற்று மனிதர்கள், இடங்கள், நூல்களுக்குமான பிணைப்புகள்:")
+        top_ents_display = []
+        for e_name, e_count in report["top_entities"]:
+            docs_linked = list({l["doc_title"] for l in report["document_entity_links"] if l["entity_name"] == e_name})
+            top_ents_display.append({"உருப்படி (Entity)": e_name, "முறை (Frequency)": e_count, "இடம்பெற்ற ஆவணங்கள் (Documents)": ", ".join(docs_linked)})
+        st.table(top_ents_display)
+
+    st.markdown("---")
+    # =====================================================================
+    # FEATURE 15: Digital Heritage Export Section
+    # =====================================================================
+    st.markdown("### 📦 சர்வதேச எண்மக் காப்பக ஏற்றுமதி (Digital Preservation & TEI Export)")
+    st.caption("அங்கீகரிக்கப்பட்ட சுவடிகளை UTF-8 உரை, உலகளாவிய TEI P5 XML, TEI JSON மற்றும் அச்சுக்குரிய ஆராய்ச்சி கோப்புகளாகப் பதிவிறக்கவும்.")
+
+    exp_col1, exp_col2 = st.columns([1, 1], gap="large")
+
+    with exp_col1:
+        st.markdown("#### 📄 ஒற்றை ஆவண ஏற்றுமதி (Individual Manuscript Export)")
+        export_doc_id = st.selectbox(
+            "ஏற்றுமதி செய்ய வேண்டிய ஆவணத்தைத் தேர்ந்தெடுக்கவும்:",
+            options=list(manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS.keys()),
+            format_func=lambda x: manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[x]["title"],
+            key="export_doc_picker",
+        )
+        selected_exp_doc = manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS[export_doc_id]
+        v_stat = knowledge_verification.get_item_verification_status(f"DOC_{export_doc_id}")
+
+        # Plain Text Export
+        txt_content = collection_intelligence.export_plain_text(
+            doc_title=selected_exp_doc["title"],
+            doc_text=selected_exp_doc["text"],
+            era=selected_exp_doc.get("era", ""),
+            category=selected_exp_doc.get("category", ""),
+            provenance="Tamil Heritage AI Canonical Store",
+            verification_status=v_stat["status"],
+            reviewer_name=v_stat.get("reviewer_name"),
+        )
+        st.download_button(
+            "⬇️ UTF-8 உரை ஆவணமாகப் பதிவிறக்கு (.txt)",
+            data=txt_content.encode("utf-8"),
+            file_name=f"{export_doc_id}_canonical.txt",
+            mime="text/plain; charset=utf-8",
+            use_container_width=True,
+            key=f"dl_txt_{export_doc_id}",
+        )
+
+        # TEI XML Export
+        xml_content = collection_intelligence.export_tei_xml(
+            doc_id=export_doc_id,
+            doc_title=selected_exp_doc["title"],
+            doc_text=selected_exp_doc["text"],
+            era=selected_exp_doc.get("era", ""),
+            category=selected_exp_doc.get("category", ""),
+            verification_status=v_stat["status"],
+            reviewer_name=v_stat.get("reviewer_name"),
+        )
+        st.download_button(
+            "⬇️ சர்வதேச TEI P5 XML வடிவில் பதிவிறக்கு (.xml)",
+            data=xml_content.encode("utf-8"),
+            file_name=f"{export_doc_id}_tei.xml",
+            mime="application/xml; charset=utf-8",
+            use_container_width=True,
+            key=f"dl_xml_{export_doc_id}",
+        )
+
+        # TEI JSON Export
+        json_content = collection_intelligence.export_tei_json(
+            doc_id=export_doc_id,
+            doc_title=selected_exp_doc["title"],
+            doc_text=selected_exp_doc["text"],
+            era=selected_exp_doc.get("era", ""),
+            category=selected_exp_doc.get("category", ""),
+            verification_status=v_stat["status"],
+        )
+        st.download_button(
+            "⬇️ கட்டமைப்பு எண்ம TEI JSON கோப்பாகப் பதிவிறக்கு (.json)",
+            data=json_content.encode("utf-8"),
+            file_name=f"{export_doc_id}_tei.json",
+            mime="application/json; charset=utf-8",
+            use_container_width=True,
+            key=f"dl_json_{export_doc_id}",
+        )
+
+        # HTML Printable Dossier Export
+        html_content = collection_intelligence.export_html_dossier(
+            doc_title=selected_exp_doc["title"],
+            doc_text=selected_exp_doc["text"],
+            era=selected_exp_doc.get("era", ""),
+            category=selected_exp_doc.get("category", ""),
+            verification_status=v_stat["status"],
+            reviewer_name=v_stat.get("reviewer_name"),
+        )
+        st.download_button(
+            "⬇️ அச்சுக்குரிய ஆய்வு ஆவணமாகப் பதிவிறக்கு (.html)",
+            data=html_content.encode("utf-8"),
+            file_name=f"{export_doc_id}_dossier.html",
+            mime="text/html; charset=utf-8",
+            use_container_width=True,
+            key=f"dl_html_{export_doc_id}",
+        )
+
+    with exp_col2:
+        st.markdown("#### 🗄️ முழுத் தொகுதித் தொகுப்பு காப்பகம் (Batch Collection Preservation)")
+        st.caption("நூலகத்தில் உள்ள அனைத்து சுவடிகள், உருப்படிகள், ஒப்புதல்கள் மற்றும் தணிக்கைப் பதிவுகளையும் ஒரே காப்பகக் கோப்பாகப் பதிவிறக்கவும்.")
+
+        all_batch_docs = list(manuscript_assistant.DIGITAL_LIBRARY_MANUSCRIPTS.values())
+        batch_archive_json = collection_intelligence.export_collection_batch_tei_json(all_batch_docs)
+
+        st.markdown(
+            f"""
+            <div style="background: #140C07; border: 1.5px solid #734F27; border-radius: 8px; padding: 18px; margin-bottom: 14px;">
+                <b style="color: #D4AF37;">🏛️ முழுத் தொகுப்பு உள்ளடக்கம்:</b>
+                <ul style="color: #F5E8D0; font-size: 0.9rem; margin-top: 6px;">
+                    <li>சுவடிகள் எண்ணிக்கை: <b>{len(all_batch_docs)} ஆவணங்கள்</b></li>
+                    <li>மொத்த வரிகள் & பத்திகள்: <b>{report['total_passages']} வரிகள்</b></li>
+                    <li>தணிக்கை & ஒப்புதல் நிலை: <b>முழு தணிக்கைப் பதிவேட்டுடன்</b></li>
+                    <li>தரநிலை: <b>TEI-P5 / OAI-PMH Compliant</b></li>
+                </ul>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.download_button(
+            "📦 முழுத் தொகுப்பு TEI காப்பகத்தைப் பதிவிறக்கு (.json)",
+            data=batch_archive_json.encode("utf-8"),
+            file_name="tamil_suvadi_collection_preservation_archive.json",
+            mime="application/json; charset=utf-8",
+            use_container_width=True,
+            key="dl_batch_collection_json",
+        )
+
+
+# =====================================================================
+# TAB: அறிவுத் தணிக்கை & ஒப்புதல் (Feature 14: Knowledge Verification)
+# =====================================================================
+with tab_verification:
+    st.markdown("### ✅ கல்வெட்டியல் அறிவுத் தணிக்கை & ஒப்புதல் (Human-in-the-Loop Knowledge Verification)")
+    st.caption("AI மாதிரிகளால் கண்டறியப்பட்ட வரலாற்று மனிதர்கள், இடங்கள், காலக்கணிப்புகள் மற்றும் கருப்பொருள் வகைப்பாடுகளை கல்வெட்டாய்வாளர் நேரில் மீள்பார்வை செய்து ஒப்புதல் அளிக்கும் பாதுகாப்பான தளம்.")
+
+    cur_role = st.session_state.get("active_user_role", "CHIEF_EPIGRAPHIST")
+    st.markdown(
+        f"""
+        <div style="background: #181008; border: 1px solid #5A3A1C; border-radius: 6px; padding: 10px 16px; margin-bottom: 16px;">
+            <span style="color: #C8AC82;">நடப்புப் பயனர் உரிமை (Active Security Role):</span> 
+            <b style="color: #E6CA65; font-size: 1.05rem;">{knowledge_verification.AUTHORIZED_ROLES.get(cur_role, knowledge_verification.READ_ONLY_ROLES.get(cur_role, cur_role))}</b>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    v_stats = knowledge_verification.get_verification_summary_stats()
+    s1, s2, s3, s4 = st.columns(4)
+    with s1:
+        st.metric("மொத்த மீள்பார்வைகள்", v_stats["total_reviewed"])
+    with s2:
+        st.metric("உறுதிப்படுத்தப்பட்டவை", v_stats["verified_count"])
+    with s3:
+        st.metric("திருத்தப்பட்டு ஏற்கப்பட்டவை", v_stats["edited_count"])
+    with s4:
+        st.metric("நிராகரிக்கப்பட்டவை", v_stats["rejected_count"])
+
+    st.markdown("---")
+    st.markdown("#### 🔍 உருப்படி தணிக்கைக் கன்சோல் (Epigraphical Review Console):")
+
+    reviewable_items = [
+        {"id": "ENTITY_முதலாம் இராஜராஜ சோழன்", "name": "முதலாம் இராஜராஜ சோழன்", "type": "RULER / மன்னன்", "source": "தஞ்சைப் பெரிய கோயில் கல்வெட்டு"},
+        {"id": "ENTITY_பெருவுடையார் கோயில்", "name": "பெருவுடையார் கோயில்", "type": "MONUMENT / கோயில்", "source": "தஞ்சைப் பெரிய கோயில் கல்வெட்டு"},
+        {"id": "ENTITY_குஞ்சரமல்லன்", "name": "குஞ்சரமல்லன்", "type": "ARCHITECT / தச்சர்", "source": "தஞ்சைப் பெரிய கோயில் கல்வெட்டு"},
+        {"id": "ENTITY_கண்ணகி", "name": "கண்ணகி", "type": "PERSON / பத்தினி", "source": "சிலப்பதிகாரம்"},
+        {"id": "ENTITY_கோவலன்", "name": "கோவலன்", "type": "PERSON / வணிகன்", "source": "சிலப்பதிகாரம்"},
+        {"id": "ENTITY_தொல்காப்பியம்", "name": "தொல்காப்பியம்", "type": "TREATISE / இலக்கண நூல்", "source": "தொல்காப்பியம் பாயிரம்"},
+        {"id": "ENTITY_திருக்குறள்", "name": "திருக்குறள்", "type": "TEXT / அறநூல்", "source": "திருக்குறள் உரை"},
+    ]
+
+    sel_review_item = st.selectbox(
+        "சரிபார்க்க வேண்டிய வரலாற்று உருப்படியைத் தேர்ந்தெடுக்கவும்:",
+        options=reviewable_items,
+        format_func=lambda x: f"{x['name']} ({x['type']}) — சான்று: {x['source']}",
+        key="review_item_picker",
+    )
+
+    item_id = sel_review_item["id"]
+    current_status = knowledge_verification.get_item_verification_status(item_id)
+
+    st.markdown(
+        f"""
+        <div style="background: #1C120A; border: 1.5px solid #4D321A; border-radius: 8px; padding: 14px 18px; margin: 12px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <b style="color: #F8ECD5; font-size: 1.1rem;">{sel_review_item['name']}</b>
+                <span style="background: {current_status['status_color']}; color: #FFF; font-weight: bold; font-size: 0.82rem; padding: 3px 10px; border-radius: 4px;">
+                    {current_status['status_label_ta']}
+                </span>
+            </div>
+            <div style="color: #C8AC82; font-size: 0.9rem; margin-top: 6px;">
+                <b>வகை:</b> {sel_review_item['type']} | <b>மூல ஆவணம்:</b> {sel_review_item['source']}
+            </div>
+            <div style="color: #E6CA65; font-size: 0.88rem; margin-top: 4px;">
+                <b>மீள்பார்வை குறிப்பு:</b> {current_status.get('notes', 'இன்னும் பதிவு செய்யப்படவில்லை')}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    review_notes = st.text_input(
+        "கல்வெட்டாய்வாளர் சான்றாதாரக் குறிப்பு (Scholarly Citation / Epigraphical Justification):",
+        value=current_status.get("notes", ""),
+        placeholder="எ.கா. SII Vol II Part I No. 1 கல்வெட்டின் நேரடி வாசகத்தின்படி உறுதிப்படுத்தப்பட்டது.",
+        key="input_review_notes",
+    )
+
+    r_col1, r_col2, r_col3 = st.columns([1, 1, 1])
+
+    with r_col1:
+        if st.button("✅ உறுதிப்படுத்து (Accept Fact)", use_container_width=True, key=f"btn_accept_{item_id}"):
+            res = knowledge_verification.save_verification_decision(
+                item_id=item_id,
+                item_type="ENTITY",
+                original_ai_prediction=sel_review_item,
+                decision="ACCEPT",
+                reviewer_role=cur_role,
+                reviewer_name=knowledge_verification.AUTHORIZED_ROLES.get(cur_role, "Reviewer"),
+                notes=review_notes,
+            )
+            if res["success"]:
+                st.success("வரலாற்று உண்மை உறுதிப்படுத்தப்பட்டு தணிக்கைப் பதிவேட்டில் சேர்க்கப்பட்டது!")
+                st.rerun()
+            else:
+                st.error(res["error"])
+
+    with r_col2:
+        if st.button("✏️ திருத்தி ஏற்றுக்கொள் (Edit & Approve)", use_container_width=True, key=f"btn_edit_{item_id}"):
+            res = knowledge_verification.save_verification_decision(
+                item_id=item_id,
+                item_type="ENTITY",
+                original_ai_prediction=sel_review_item,
+                decision="EDIT",
+                reviewed_value={**sel_review_item, "edited": True, "notes": review_notes},
+                reviewer_role=cur_role,
+                reviewer_name=knowledge_verification.AUTHORIZED_ROLES.get(cur_role, "Reviewer"),
+                notes=review_notes,
+            )
+            if res["success"]:
+                st.info("திருத்தப்பட்ட வடிவம் பதிவு செய்யப்பட்டு ஏற்கப்பட்டது!")
+                st.rerun()
+            else:
+                st.error(res["error"])
+
+    with r_col3:
+        if st.button("❌ ஆதாரமற்றதென நிராகரி (Reject)", use_container_width=True, key=f"btn_reject_{item_id}"):
+            res = knowledge_verification.save_verification_decision(
+                item_id=item_id,
+                item_type="ENTITY",
+                original_ai_prediction=sel_review_item,
+                decision="REJECT",
+                reviewer_role=cur_role,
+                reviewer_name=knowledge_verification.AUTHORIZED_ROLES.get(cur_role, "Reviewer"),
+                notes=review_notes,
+            )
+            if res["success"]:
+                st.warning("ஆதாரமற்றதென நிராகரிக்கப்பட்டு AI தற்காலிகக் குறியீடு அகற்றப்பட்டது!")
+                st.rerun()
+            else:
+                st.error(res["error"])
+
+    st.markdown("---")
+    st.markdown("#### 📜 முழுமையான தணிக்கைப் பதிவேடு (Chronological Security Audit Trail):")
+    audit_entries = knowledge_verification.get_audit_trail()
+    if audit_entries:
+        st.caption(f"மொத்தம் {len(audit_entries)} தணிக்கை நிகழ்வுகள் பதிவாகியுள்ளன:")
+        for log in reversed(audit_entries[-10:]):
+            st_color = "#10B981" if log.get("status") == "SUCCESS" else "#EF4444"
+            st.markdown(
+                f"""
+                <div style="background: #140C07; border-left: 3px solid {st_color}; padding: 8px 14px; margin-bottom: 6px; border-radius: 4px; font-size: 0.88rem;">
+                    <span style="color: #D4AF37;">[{log.get('timestamp')}]</span> | 
+                    <span style="color: #F8ECD5;"><b>{log.get('item_id')}</b></span> | 
+                    செயல்: <b>{log.get('action')}</b> | 
+                    ஆய்வாளர்: <i>{log.get('reviewer_name')} ({log.get('reviewer_role')})</i> | 
+                    நிலை: <span style="color:{st_color};"><b>{log.get('status')}</b></span><br>
+                    <small style="color: #A89F91;">குறிப்பு: {log.get('notes') or log.get('message', 'குறிப்பில்லை')}</small>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+    else:
+        st.info("இன்னும் தணிக்கைப் பதிவுகள் எதுவும் இல்லை.")
+
+
+# =====================================================================
+# TAB 5: தமிழ் NLP கருவிகள் (Preserved 4 Core Tamil NLP Features)
+# =====================================================================
+with tab_nlp:
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #24160E 0%, #1A0F0A 100%); border: 1.5px solid #734F27; border-left: 5px solid #E6CA65; border-radius: 8px; padding: 18px 24px; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #E6CA65;">🧠 தமிழ் AI நுண்ணறிவு & குரல் ஆய்வகம் (5 Core Tamil AI & Voice Features)</h3>
+            <p style="margin: 6px 0 0 0; color: #C8AC82; font-size: 0.96rem;">
+                OCR மூலம் பிரித்தெடுக்கப்பட்ட சுவடி/நூல் உரையின் மீது நேரடியாக இயங்கும் <b>5 சிறப்பம்சங்கள்</b>: 
+                1. முக்கிய சொற்கள், 2. உரைச் சுருக்கம், 3. திறன்மிகு தேடல், 4. வினா-விடை, மற்றும் 5. திறன்மிகு தமிழ்க் குரல் (TTS).
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Determine default/active text from Tab 1 or sample
+    tess_for_nlp = st.session_state.get("tess_result")
+    ai_for_nlp = st.session_state.get("ai_result")
+    active_nlp_corpus = ""
+    if tess_for_nlp and tess_for_nlp.get("text"):
+        active_nlp_corpus = tess_for_nlp["text"]
+    elif ai_for_nlp and ai_for_nlp.get("text"):
+        active_nlp_corpus = ai_for_nlp["text"]
+
+    if not active_nlp_corpus.strip():
+        active_nlp_corpus = (
+            "தொல்காப்பியம் தமிழ் மொழியின் மிகத் தொன்மையான இலக்கண நூலாகும். "
+            "இந்நூல் எழுத்து, சொல், பொருள் ஆகிய மூன்று அதிகாரங்களைக் கொண்டுள்ளது. "
+            "பண்டைய காலத்தில் இராஜராஜ சோழன் கி.பி. 1010 ஆம் ஆண்டு தஞ்சைப் பெரிய கோயிலைக் கட்டினார். "
+            "சோழர்களின் ஆட்சிக் காலத்தில் தமிழ் இலக்கியமும் கலைகளும் பெரும் வளர்ச்சி அடைந்தன. "
+            "செகுவேரா Tamil Heritage Series Vol. 2 contains valuable ancient palm-leaf inscriptions. "
+            "சுவடிகளில் எழுதப்பட்ட வரலாற்றுச் சான்றுகள் தமிழகத்தின் பழம்பெருமையை பறைசாற்றுகின்றன."
+        )
+
+    nlp_feature_choice = st.selectbox(
+        "🎯 இயக்க வேண்டிய சிறப்பம்சத்தைத் தேர்ந்தெடுக்கவும் (Select AI & Voice Feature 1 to 5):",
+        options=[
+            "1. 🏷️ தமிழ் முக்கிய சொல் பிரித்தெடுத்தல் (Tamil Keyword Extraction)",
+            "2. 📄 தமிழ் உரைச் சுருக்கம் (Tamil Text Summarisation)",
+            "3. 🔍 திறன்மிகு தமிழ் உரைத் தேடல் (Smart Tamil Text Search across documents)",
+            "4. ❓ ஆவண வினா-விடை (Document Question Answering)",
+            "5. 🔊 திறன்மிகு தமிழ்க் குரல் (Smart Tamil Voice - Text to Speech)",
+        ],
+        index=0,
+        key="nlp_feature_dropdown",
+    )
+
+    st.markdown("---")
+
+    # -------------------------------------------------------------
+    # 1. Tamil Keyword Extraction
+    # -------------------------------------------------------------
+    if nlp_feature_choice.startswith("1."):
+        st.markdown("#### 1. 🏷️ தமிழ் முக்கிய சொல் பிரித்தெடுத்தல் (Tamil Keyword Extraction)")
+        st.caption("Extracts important Tamil & English keywords and multi-word keyphrases from actual OCR text using TF-ISF salience and C-Value phrase cohesion. Fabricated outputs are never used.")
+
+        kw_input = st.text_area("ஆய்வு செய்ய வேண்டிய OCR உரை:", value=active_nlp_corpus, height=140, key="nlp_f1_input")
+        k_col1, k_col2 = st.columns([1, 1])
+        with k_col1:
+            top_kw_count = st.slider("பிரித்தெடுக்க வேண்டிய முக்கிய சொற்களின் எண்ணிக்கை (Top N):", min_value=3, max_value=25, value=10)
+        with k_col2:
+            inc_phrases = st.checkbox("சொற்றொடர்களையும் (Keyphrases) பிரித்தெடுக்கவும்", value=True)
+
+        if st.button("🚀 முக்கிய சொற்களைப் பிரித்தெடு (Extract Keywords)", key="nlp_f1_btn", type="primary"):
+            with st.spinner("முக்கிய சொற்களைப் பிரித்தெடுக்கிறது..."):
+                kw_res = tamil_nlp.extract_tamil_keywords(kw_input, top_n=top_kw_count, include_phrases=inc_phrases)
+
+            if kw_res["success"]:
+                m1, m2, m3, m4 = st.columns(4)
+                with m1:
+                    st.metric("மொத்த டோக்கன்கள்", kw_res["total_tokens"])
+                with m2:
+                    st.metric("தனித்துவ டோக்கன்கள்", kw_res["unique_tokens"])
+                with m3:
+                    st.metric("தமிழ் சொற்கள்", kw_res["language_distribution"]["tamil_tokens"])
+                with m4:
+                    st.metric("ஆங்கிலம் / பிற", kw_res["language_distribution"]["english_tokens"] + kw_res["language_distribution"]["mixed_tokens"])
+
+                st.write("###### 🎯 கண்டறியப்பட்ட முதன்மைச் சொற்கள் & சொற்றொடர்கள்:")
+                for kw in kw_res["keywords"]:
+                    badge_color = "#D4AF37" if kw["type"] == "Keyphrase" else "#98E29C"
+                    lang_label = kw["language"]
+                    st.markdown(
+                        f"""
+                        <div style='background: #1F140D; border: 1px solid #4D3117; padding: 8px 14px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;'>
+                            <span style='font-size: 1.05rem; font-weight: 600; color: #F5E8D0;'>• {kw['term']}</span>
+                            <span>
+                                <small style='color: {badge_color}; border: 1px solid {badge_color}; padding: 2px 6px; border-radius: 4px; margin-right: 8px;'>{kw['type']}</small>
+                                <small style='color: #C8AC82; margin-right: 8px;'>மொழி: {lang_label}</small>
+                                <small style='color: #E6CA65; font-weight: bold;'>மதிப்பெண்: {kw['score']}</small>
+                            </span>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+            else:
+                st.error(kw_res.get("error", "பிழை ஏற்பட்டது"))
+
+    # -------------------------------------------------------------
+    # 2. Tamil Text Summarisation
+    # -------------------------------------------------------------
+    elif nlp_feature_choice.startswith("2."):
+        st.markdown("#### 2. 📄 தமிழ் உரைச் சுருக்கம் (Tamil Text Summarisation)")
+        st.caption("Generates a clear extractive summary directly from the original OCR sentences. Preserves the original text completely unchanged without generative hallucinations. The summarisation methodology is explicitly labeled.")
+
+        sum_input = st.text_area("சுருக்க வேண்டிய OCR உரை:", value=active_nlp_corpus, height=150, key="nlp_f2_input")
+        s_col1, s_col2 = st.columns([1, 1])
+        with s_col1:
+            max_sents = st.slider("சுருக்கத்தில் இருக்க வேண்டிய வாக்கியங்கள் (Sentences):", min_value=1, max_value=8, value=3)
+        with s_col2:
+            st.info("💡 **நெறிமுறை (Protocol):** மூல உரை 100% மாற்றமின்றி பாதுகாக்கப்படும். கற்பனையான வெளியீடுகள் (Hallucinations) தவிர்க்கப்பட்டு உண்மையான வரிகள் மட்டுமே தேர்வு செய்யப்படும்.")
+
+        if st.button("📄 உரைச் சுருக்கத்தை உருவாக்கு (Generate Summary)", key="nlp_f2_btn", type="primary"):
+            with st.spinner("உரைச் சுருக்கம் தயாரிக்கப்படுகிறது..."):
+                sum_res = tamil_nlp.summarize_tamil_text(sum_input, max_sentences=max_sents)
+
+            if sum_res["success"]:
+                m1, m2, m3 = st.columns(3)
+                with m1:
+                    st.metric("அசல் வாக்கியங்கள்", sum_res["original_sentence_count"])
+                with m2:
+                    st.metric("சுருக்க வாக்கியங்கள்", sum_res["summary_sentence_count"])
+                with m3:
+                    st.metric("சுருக்க சதவீதம்", f"{sum_res['compression_percentage']}%")
+
+                st.markdown(
+                    f"""
+                    <div style='background: #24160E; border-left: 4px solid #D4AF37; padding: 10px 16px; border-radius: 4px; margin: 12px 0;'>
+                        <b>பயன்படுத்தப்பட்ட முறை (Methodology):</b> <span style='color: #E6CA65;'>{sum_res['methodology']}</span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+                st.markdown("##### 📜 தொகுக்கப்பட்ட சுருக்கம் (Summary):")
+                st.markdown(
+                    f"""
+                    <div style='background: #1B1109; border: 1.5px solid #5A3A1C; padding: 16px 20px; border-radius: 8px; font-size: 1.05rem; line-height: 1.8; color: #F8ECD5;'>
+                        {sum_res['summary'].replace(chr(10), '<br>')}
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+                st.download_button(
+                    "📥 சுருக்கத்தைப் பதிவிறக்கு (Download Summary TXT)",
+                    data=sum_res["summary"].encode("utf-8"),
+                    file_name="tamil_summary.txt",
+                    mime="text/plain; charset=utf-8",
+                    key="dl_summary_btn",
+                )
+            else:
+                st.error(sum_res.get("error", "பிழை ஏற்பட்டது"))
+
+    # -------------------------------------------------------------
+    # 3. Smart Tamil Text Search
+    # -------------------------------------------------------------
+    elif nlp_feature_choice.startswith("3."):
+        st.markdown("#### 3. 🔍 திறன்மிகு தமிழ் உரைத் தேடல் (Smart Tamil Text Search across documents)")
+        st.caption("Searches Tamil words or phrases across all currently processed documents, PDF pages, batch files, and historical session logs with exact line and page references. Reuses existing in-memory storage without duplicate databases.")
+
+        search_q = st.text_input("🔍 தேட வேண்டிய சொல் அல்லது சொற்றொடர் (Search term or phrase):", value="சோழன்", key="nlp_f3_query")
+
+        active_dict = {
+            "name": st.session_state.doc_name or "நடப்பு ஆவணம்",
+            "text": active_nlp_corpus,
+        }
+
+        if st.button("🔎 ஆவணங்களில் தேடு (Search Across Documents)", key="nlp_f3_btn", type="primary"):
+            with st.spinner("அனைத்து ஆவணங்களிலும் தேடுகிறது..."):
+                search_res = tamil_nlp.smart_tamil_search(
+                    query=search_q,
+                    active_doc=active_dict,
+                    pdf_pages=st.session_state.pdf_page_results,
+                    batch_results=st.session_state.batch_results,
+                    ocr_history=st.session_state.ocr_history,
+                )
+
+            if search_res["success"]:
+                if search_res["total_matches"] > 0:
+                    st.success(f"தேடல் முடிந்தது! மொத்தம் **{search_res['total_matches']}** பொருத்தங்கள் ({search_res['total_documents_matched']} ஆவணங்களில்) கண்டறியப்பட்டன.")
+                    for m_idx, m_item in enumerate(search_res["results"], start=1):
+                        st.markdown(
+                            f"""
+                            <div style='background: #1B1109; border: 1px solid #4D3117; padding: 12px 16px; border-radius: 6px; margin-bottom: 8px;'>
+                                <div style='display: flex; justify-content: space-between; margin-bottom: 6px;'>
+                                    <b style='color: #D4AF37;'>{m_idx}. [{m_item['doc_type']}] {m_item['doc_source']}</b>
+                                    <span style='color: #C8AC82;'>குறிப்பு: <b>{m_item['reference']}</b></span>
+                                </div>
+                                <div style='color: #F8ECD5; font-size: 0.98rem; background: #261810; padding: 8px 12px; border-radius: 4px;'>
+                                    {m_item['snippet']}
+                                </div>
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
+                else:
+                    st.warning(f"'{search_q}' என்ற சொல் எந்த ஆவணத்திலும் கண்டறியப்படவில்லை (No matches found).")
+            else:
+                st.error(search_res.get("message", "பிழை ஏற்பட்டது"))
+
+    # -------------------------------------------------------------
+    # 4. Document Question Answering
+    # -------------------------------------------------------------
+    elif nlp_feature_choice.startswith("4."):
+        st.markdown("#### 4. ❓ ஆவண வினா-விடை (Document Question Answering)")
+        st.caption("Ask questions about the currently processed Tamil document. Answers are strictly extracted from the actual OCR text with supporting passage excerpts and document/page references. If the answer is not present in the document, it explicitly reports that it could not be found.")
+
+        qa_target_text = active_nlp_corpus
+        qa_doc_title = st.session_state.doc_name or "நடப்பு ஆவணம்"
+
+        st.text_area("வினா எழுப்பப்படும் நடப்பு ஆவண உரை:", value=qa_target_text, height=120, disabled=True, key="nlp_f4_context_preview")
+
+        qa_input = st.text_input("❓ ஆவணத்தைப் பற்றிய உங்கள் வினா (Ask a question about this document):", value="தஞ்சைப் பெரிய கோயிலைக் கட்டியது யார்?", key="nlp_f4_question")
+
+        if st.button("💬 விடை காண்க (Find Answer in Document)", key="nlp_f4_btn", type="primary"):
+            with st.spinner("ஆவணத்தில் விடையைத் தேடுகிறது..."):
+                qa_res = tamil_nlp.answer_document_question(
+                    question=qa_input,
+                    context_text=qa_target_text,
+                    doc_name=qa_doc_title,
+                    pdf_pages=st.session_state.pdf_page_results,
+                    batch_results=st.session_state.batch_results,
+                )
+
+            if qa_res["success"]:
+                if qa_res["found"]:
+                    st.markdown(
+                        f"""
+                        <div style='background: #1B2E1B; border: 1.5px solid #4CAF50; border-radius: 8px; padding: 18px 22px; margin: 14px 0;'>
+                            <div style='font-size: 1.15rem; font-weight: bold; color: #A5D6A7; margin-bottom: 8px;'>
+                                ✅ விடை (Answer):
+                            </div>
+                            <div style='font-size: 1.12rem; color: #FFFFFF; line-height: 1.6;'>
+                                {qa_res['answer']}
+                            </div>
+                            <div style='margin-top: 12px; padding-top: 8px; border-top: 1px solid #2E7D32; display: flex; justify-content: space-between; font-size: 0.92rem; color: #C8E6C9;'>
+                                <span>📌 <b>ஆவணச் சான்று:</b> {qa_res['reference']}</span>
+                                <span>🎯 <b>நம்பிக்கை விகிதம்:</b> {qa_res['confidence_percentage']}</span>
+                            </div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+                else:
+                    st.markdown(
+                        f"""
+                        <div style='background: #2E1B1B; border: 1.5px solid #F44336; border-radius: 8px; padding: 18px 22px; margin: 14px 0;'>
+                            <div style='font-size: 1.15rem; font-weight: bold; color: #EF9A9A; margin-bottom: 6px;'>
+                                ❌ விடை கண்டறியப்படவில்லை (Not Found in Document):
+                            </div>
+                            <div style='font-size: 1.05rem; color: #FFCDD2; line-height: 1.5;'>
+                                {qa_res['answer']}
+                            </div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+            else:
+                st.error(qa_res.get("answer", "பிழை ஏற்பட்டது"))
+
+
+        # -------------------------------------------------------------
+    # 5. Smart Tamil Voice (Text-to-Speech)
+    # -------------------------------------------------------------
+    elif nlp_feature_choice.startswith("5."):
+        st.markdown("#### 5. 🔊 திறன்மிகு தமிழ்க் குரல் (Smart Tamil Voice - Text to Speech)")
+        st.caption("Reads Tamil heritage text aloud using an authentic Tamil-language voice. Supports speech speed controls, chunk-by-chunk playback for long texts, and MP3 download.")
+
+        v_input_text = st.text_area("வாசிக்க வேண்டிய தமிழ் உரை:", value=active_nlp_corpus, height=140, key="nlp_f5_voice_input")
+
+        v_diag2 = tamil_voice.check_voice_engine_status()
+        if v_diag2["internet_connected"]:
+            st.markdown(
+                """
+                <div style='background: #1B2B1B; border: 1px solid #2E7D32; border-left: 4px solid #4CAF50; padding: 8px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.92rem; color: #C8E6C9;'>
+                    🌐 <b>குரல் நிலை:</b> Google Neural Tamil Voice (உண்மையான தமிழ் உச்சரிப்பு தயார்) | <b>முறை:</b> ஆன்லைன் (Online)
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        else:
+            st.warning(f"⚠️ {v_diag2['status_message']}")
+
+        t2_vcol1, t2_vcol2 = st.columns([1, 1])
+        with t2_vcol1:
+            t2_speed = st.radio("குரல் வேகம் (Speed):", ["இயல்பான வேகம் (1.0x)", "மெதுவான வாசிப்பு (0.8x - சுவடி படிப்பு முறை)"], horizontal=True, key="t2_vspeed")
+        with t2_vcol2:
+            st.caption("💡 Streamlit ஆடியோ பிளேயரில் **Play, Pause, Resume, Stop, Scrub** மற்றும் **வேகக் கட்டுப்பாடு** நேரடியாகக் கிடைக்கும்.")
+
+        t2_b1, t2_b2 = st.columns([2, 1])
+        with t2_b1:
+            btn_play_t2 = st.button("🔊 உரையை வாசித்துக் காட்டு (Play Speech)", key="nlp_f5_btn", type="primary")
+        with t2_b2:
+            btn_clear_t2 = st.button("⏹️ ஆடியோவை நீக்கு (Clear)", key="nlp_f5_clear_btn")
+
+        if btn_clear_t2:
+            st.session_state.voice_audio_bytes = None
+            st.session_state.voice_info = None
+            st.rerun()
+
+        if btn_play_t2:
+            is_slow2 = t2_speed.startswith("மெதுவான")
+            with st.spinner("தமிழ்க் குரல் ஆடியோ தயாராகிறது..."):
+                res2 = tamil_voice.synthesize_tamil_speech(v_input_text, slow=is_slow2)
+                if res2["success"]:
+                    st.session_state.voice_audio_bytes = res2["audio_bytes"]
+                    st.session_state.voice_info = res2
+                    st.success(f"தமிழ்க் குரல் ஆடியோ தயார் ({res2['word_count']} சொற்கள், ~{res2['duration_est_seconds']} விநாடிகள்)!")
+                else:
+                    st.error(res2["error"])
+
+        if st.session_state.get("voice_audio_bytes") is not None:
+            st.audio(st.session_state.voice_audio_bytes, format="audio/mp3", autoplay=False, key="audio_player_nlp_voice_tab")
+            st.download_button("📥 MP3 பதிவிறக்கு", data=st.session_state.voice_audio_bytes, file_name="smart_tamil_voice.mp3", mime="audio/mp3", key="t2_dl_mp3")
+
+        # Chunk-by-chunk for long texts in Tab 2
+        if v_input_text.strip() and len(v_input_text) > 150:
+            with st.expander("📖 பத்தி வாரியாகப் பிரித்து வாசித்தல் (Read Chunk-by-Chunk for Long Manuscripts)", expanded=False):
+                chunks2 = tamil_voice.chunk_tamil_text_for_voice(v_input_text, max_chunk_chars=350)
+                st.caption(f"நீண்ட உரை {len(chunks2)} தொடர்ச்சியான பகுதிகளாகப் பிரிக்கப்பட்டுள்ளது:")
+                for c_idx, ch in enumerate(chunks2, start=1):
+                    cc1, cc2 = st.columns([3, 1])
+                    with cc1:
+                        st.write(f"**பகுதி {c_idx}:** {ch}")
+                    with cc2:
+                        if st.button(f"🔊 பகுதி {c_idx} கேள்", key=f"btn_t2_chunk_{c_idx}"):
+                            with st.spinner(f"பகுதி {c_idx} தயாராகிறது..."):
+                                ch_res2 = tamil_voice.synthesize_tamil_speech(ch, slow=(t2_speed.startswith("மெதுவான")))
+                                if ch_res2["success"]:
+                                    st.audio(ch_res2["audio_bytes"], format="audio/mp3", autoplay=False, key=f"audio_player_nlp_chunk_{c_idx}")
+                                else:
+                                    st.error(ch_res2["error"])
+
+
+
+# =====================================================================
+# TAB 6: செயலாக்க வரலாறு (Processing History)
+# =====================================================================
+with tab_history:
+    st.markdown("### 📜 OCR செயலாக்க வரலாறு & தணிக்கை (Processing History & Audit Trail)")
+    hist = st.session_state.ocr_history
+    if hist:
+        h_col1, h_col2 = st.columns([3, 1])
+        with h_col2:
+            if st.button("🗑️ வரலாற்றை அழிக்கவும் (Clear History)", key="tab3_clear_hist"):
+                st.session_state.ocr_history = []
+                st.rerun()
+
+        for h_entry in hist:
+            st.markdown(
+                f"""
+                <div style='background: #1B1109; border: 1px solid #4D3117; padding: 12px 16px; border-radius: 6px; margin-bottom: 10px;'>
+                    <b style='color: #D4AF37;'>{h_entry['id']}. {h_entry['filename']}</b> | 
+                    <span style='color: #C8AC82;'>{h_entry['ocr_mode']}</span> | 
+                    <span style='color: #98E29C;'>{h_entry['word_count']} சொற்கள் ({h_entry['char_count']} எழுத்துக்கள்)</span> | 
+                    <small style='color: #8D6E63;'>{h_entry['timestamp']}</small><br>
+                    <div style='color: #D7CCC8; margin-top: 6px; font-size: 0.95rem;'>"{h_entry['preview']}"</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+    else:
+        st.info("இன்னும் செயலாக்க வரலாறு எதுவும் இல்லை (History is currently empty). Tab 1-ல் ஆவணத்தை OCR செய்தவுடன் இங்கே தானாகப் பதிவாகும்.")

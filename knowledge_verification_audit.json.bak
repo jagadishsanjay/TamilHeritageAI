@@ -1,0 +1,891 @@
+[
+  {
+    "timestamp": "2026-10-15 20:59:50",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 20:59:50",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:06:09",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:06:09",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:25:40",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:25:40",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:27:12",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:27:12",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:28:17",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:28:17",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:28:32",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:28:32",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:30:20",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:30:20",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:30:49",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:30:49",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:40:51",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:40:51",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:41:20",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:41:20",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:41:40",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:41:40",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:44:57",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:44:57",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:45:07",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:45:07",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:45:08",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:45:08",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:55:46",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:55:46",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 21:56:10",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 21:56:10",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:04:19",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:04:20",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:04:33",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:04:33",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:14:33",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:14:33",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:36:30",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:36:30",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:36:50",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:36:50",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:38:35",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:38:35",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:42:06",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:42:06",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:42:12",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:42:12",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:42:22",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:42:22",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:59:10",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:59:10",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:59:16",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:59:16",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 22:59:27",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 22:59:27",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:18:54",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:18:54",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:20:00",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:20:00",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:20:54",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:20:54",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:21:04",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:21:04",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:21:11",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:21:11",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:43:06",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:43:06",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:44:26",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:44:26",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-15 23:54:31",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-15 23:54:31",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 02:22:35",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 02:22:35",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 02:32:17",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Anonymous Guest",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 02:32:17",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Dr. K. Rajan (Epigraphist)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against ASI Epigraphia Indica Vol II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 02:53:17",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 02:53:17",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 02:56:55",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 02:56:55",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 03:19:54",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 03:19:54",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 03:21:06",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 03:21:06",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 03:21:06",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 03:21:06",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "முதன்மை ஆய்வாளர் (Dr. K. Swaminathan)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "கல்வெட்டு ஆதாரத்துடன் சரிபார்க்கப்பட்டது.",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 03:23:51",
+    "item_id": "CANON_TEST_DOC",
+    "action": "REJECT",
+    "reviewer_name": "Guest Student",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  },
+  {
+    "timestamp": "2026-10-16 03:23:51",
+    "item_id": "CANON_TEST_DOC",
+    "item_type": "ENTITY",
+    "action": "ACCEPT",
+    "new_status": "HUMAN_VERIFIED",
+    "reviewer_name": "Chief Epigraphist (முதன்மை கல்வெட்டாய்வாளர்)",
+    "reviewer_role": "CHIEF_EPIGRAPHIST",
+    "notes": "Verified against Epigraphia Indica Vol. II",
+    "status": "SUCCESS"
+  },
+  {
+    "timestamp": "2026-10-16 03:23:51",
+    "item_id": "ENTITY_சோழன்_TEST",
+    "action": "ACCEPT",
+    "reviewer_name": "Student Viewer",
+    "reviewer_role": "GUEST_VIEWER",
+    "status": "BLOCKED_UNAUTHORIZED",
+    "message": "அனுமதி மறுக்கப்பட்டது (Access Denied): 'GUEST_VIEWER' பிரிவினருக்கு ஆய்வு முடிவுகளை மாற்றும் அல்லது ஒப்புதல் அளிக்கும் உரிமை இல்லை."
+  }
+]

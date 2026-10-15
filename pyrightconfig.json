@@ -1,0 +1,15 @@
+{
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "**/__pycache__"
+  ],
+  "extraPaths": [
+    "C:\\Users\\jagad\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages",
+    "C:\\Users\\jagad\\OneDrive\\Documents\\TamilHeritageAI"
+  ],
+  "pythonPath": "C:\\Users\\jagad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+  "pythonVersion": "3.14",
+  "reportMissingImports": "none"
+}
